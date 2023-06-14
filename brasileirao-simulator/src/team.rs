@@ -1,10 +1,10 @@
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct Team {
     pub name: String,
     points: u32,
     wins: u32,
     games: u32,
-    win_rate: f32,
+    pub win_rate: f32,
 }
 
 impl Team {
@@ -31,18 +31,19 @@ impl Team {
 
     pub fn lose(mut self) -> Self {
         self.games += 1;
+        self = self.update_win_rate();
+        self
+    }
+
+    pub fn win_points(mut self) -> Self {
+        self = self.win();
+        self.points += 3;
         self.update_win_rate()
     }
 
-    pub fn win_points(self) -> Self {
-        let mut new_self = self.win();
-        new_self.points += 3;
-        new_self
-    }
-
-    pub fn tie_points(self) -> Self {
-        let mut new_self = self.lose();
-        new_self.points += 1;
-        new_self
+    pub fn tie_points(mut self) -> Self {
+        self.games += 1;
+        self.points += 1;
+        self.update_win_rate()
     }
 }
