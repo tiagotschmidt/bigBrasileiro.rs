@@ -1,0 +1,380 @@
+16/04 - Flamengo x Coritiba
+16/04 - Botafogo x São Paulo
+16/04 - Palmeiras x Cuiabá
+16/04 - Corinthians x Cruzeiro
+16/04 - Red Bull Bragantino x Bahia
+16/04 - Atlético-MG x Vasco
+16/04 - Grêmio x Santos
+16/04 - Athletico-PR x Goiás
+16/04 - Fortaleza x Internacional
+16/04 - América-MG x Fluminense
+23/04 - Fluminense x Athletico-PR
+23/04 - Vasco x Palmeiras
+23/04 - São Paulo x América-MG
+23/04 - Santos x Atlético-MG
+23/04 - Goiás x Corinthians
+23/04 - Cruzeiro x Grêmio
+23/04 - Internacional x Flamengo
+23/04 - Coritiba x Fortaleza
+23/04 - Bahia x Botafogo
+23/04 - Cuiabá x Red Bull Bragantino
+30/04 - Flamengo x Botafogo
+30/04 - Vasco x Bahia
+30/04 - Palmeiras x Corinthians
+30/04 - Santos x América-MG
+30/04 - Red Bull Bragantino x Cruzeiro
+30/04 - Atlético-MG x Athletico-PR
+30/04 - Internacional x Goiás
+30/04 - Coritiba x São Paulo
+30/04 - Fortaleza x Fluminense
+30/04 - Cuiabá x Grêmio
+07/05 - Fluminense x Vasco
+07/05 - Botafogo x Atlético-MG
+07/05 - São Paulo x Internacional
+07/05 - Corinthians x Fortaleza
+07/05 - Goiás x Palmeiras
+07/05 - Cruzeiro x Santos
+07/05 - Grêmio x Red Bull Bragantino
+07/05 - Athletico-PR x Flamengo
+07/05 - Bahia x Coritiba
+07/05 - América-MG x Cuiabá
+10/05 - Flamengo x Goiás
+10/05 - Botafogo x Corinthians
+10/05 - Palmeiras x Grêmio
+10/05 - Santos x Bahia
+10/05 - Red Bull Bragantino x América-MG
+10/05 - Cruzeiro x Fluminense
+10/05 - Internacional x Ahtletico-PR
+10/05 - Coritiba x Vasco
+10/05 - Fortaleza x São Paulo
+10/05 - Cuiabá X Atlético-MG
+14/05 - Fluminense x Cuiabá
+14/05 - Vasco x Santos
+14/05 - Palmeiras x Red Bull Bragantino
+14/05 - Corinthians x São Paulo
+14/05 - Goiás x Botafogo
+14/05 - Atlético-MG x Internacional
+14/05 - Grêmio x Fortaleza
+14/05 - Athletico-PR x Coritiba
+14/05 - Bahia x Flamengo
+14/05 - América-MG x Cruzeiro
+21/05 - Flamengo x Corinthians
+21/05 - Botafogo x Fluminense
+21/05 - São Paulo x Vasco
+21/05 - Santos x Palmeiras
+21/05 - Red Bull Bragantino x Athletico
+21/05 - Cruzeiro x Cuiabá
+21/05 - Grêmio x Internacional
+21/05 - Coritiba x Atlético-MG
+21/05 - Bahia x Goiás
+21/05 - América-MG x Fortaleza
+28/05 - Flamengo x Cruzeiro
+28/05 - Botafogo x América-MG
+28/05 - São Paulo x Goiás
+28/05 - Corinthians x Fluminense
+28/05 - Red Bull Bragantino x Santos
+28/05 - Atlético-MG x Palmeiras
+28/05 - Internacional x Bahia
+28/05 - Athletico-PR x Grêmio
+28/05 - Fortaleza x Vasco
+28/05 - Cuiabá x Coritiba
+04/06 - Fluminense x Red Bull Bragantino
+04/06 - Vasco x Flamengo
+04/06 - Palmeiras x Coritiba
+04/06 - Santos x Internacional
+04/06 - Goiás x Cuiabá
+04/06 - Cruzeiro x Atlético-MG
+04/06 - Grêmio x São Paulo
+04/06 - Athletico-PR x Botafogo
+04/06 - Fortaleza x Bahia
+04/06 - América-MG x Corinthians
+11/06 - Flamengo x Grêmio
+11/06 - Botafogo x Fortaleza
+11/06 - São Paulo x Palmeiras
+11/06 - Corinthians x Cuiabá
+11/06 - Goiás x Fluminense
+11/06 - Atlético-MG x Red Bull Bragantino
+11/06 - Internacional x Vasco
+11/06 - Coritiba x Santos
+11/06 - Bahia x Cruzeiro
+11/06 - América-MG x Athletico-PR
+21/06 - Fluminense x Atlético-MG
+21/06 - Vasco x Goiás
+21/06 - São Paulo x Athletico-PR
+21/06 - Santos x Corinthians
+21/06 - Red Bull Bragantino x Flamengo
+21/06 - Cruzeiro x Fortaleza
+21/06 - Grêmio x América-MG
+21/06 - Coritiba x Internacional
+21/06 - Bahia x Palmeiras
+21/06 - Cuiabá x Botafogo
+25/06 - Fluminense x Bahia
+25/06 - Vasco x Cuiabá
+25/06 - Palmeiras x Botafogo
+25/06 - Santos x Flamengo
+25/06 - Red Bull Bragantino x Goiás
+25/06 - Cruzeiro x São Paulo
+25/06 - Grêmio x Coritiba
+25/06 - Athletico-PR x Corinthians
+25/06 - Fortaleza x Atlético-MG
+25/06 - América-MG x Internacional
+02/07 - Flamengo x Fortaleza
+02/07 - Botafogo x Vasco
+02/07 - São Paulo x Fluminense
+02/07 - Corinthians x Red Bull Bragantino
+02/07 - Goiás x Coritiba
+02/07 - Atlético-MG x América-MG
+02/07 - Internacional x Cruzeiro
+02/07 - Athletico-PR x Palmeiras
+02/07 - Bahia x Grêmio
+02/07 - Cuiabá x Santos
+09/07 - Fluminense x Internacional
+09/07 - Vasco x Cruzeiro
+09/07 - Palmeiras x Flamengo
+09/07 - Santos x Goiás
+09/07 - Red Bull Bragantino x São Paulo
+09/07 - Atlético-MG x Corinthians
+09/07 - Grêmio x Botafogo
+09/07 - Coritiba x América-MG
+09/07 - Fortaleza x Athletico-PR
+09/07 - Cuiabá x Bahia
+16/07 - Fluminense x Flamengo
+16/07 - Botafogo x Red Bull Bragantino
+16/07 - São Paulo x Santos
+16/07 - Corinthians x Grêmio
+16/07 - Goiás x Atlético-MG
+16/07 - Cruzeiro x Coritiba
+16/07 - Internacional x Palmeiras
+16/07 - Athletico-PR x Bahia
+16/07 - Fortaleza x Cuiabá
+16/07 - América-MG x Vasco
+23/07 - Flamengo x América MG
+23/07 - Vasco x Athletico-PR
+23/07 - Palmeiras x Fortaleza
+23/07 - Santos x Botafogo
+23/07 - Red Bull Bragantino x Internacional
+23/07 - Cruzeiro x Goiás
+23/07 - Grêmio x Atlético-MG
+23/07 - Coritiba x Fluminense
+23/07 - Bahia x Corinthians
+23/07 - Cuiabá x São Paulo
+30/07 - Fluminense x Santos
+30/07 - Botafogo x Coritiba
+30/07 - São Paulo x Bahia
+30/07 - Corinthians x Vasco
+30/07 - Goiás x Grêmio
+30/07 - Atlético-MG x Flamengo
+30/07 - Internacional x Cuiabá
+30/07 - Athletico-PR x Cruzeiro
+30/07 - Fortaleza x Red Bull Bragantino
+30/07 - América-MG x Palmeiras
+02/08 - Fluminense x Palmeiras
+02/08 - Vasco x Grêmio
+02/08 - São Paulo x Atlético-MG
+02/08 - Santos x Athletico-PR
+02/08 - Goiás x Fortaleza
+02/08 - Cruzeiro x Botafogo
+02/08 - Internacional x Corinthians
+02/08 - Coritiba x Red Bull Bragantino
+02/08 - Bahia x América-MG
+02/08 - Cuiabá x Flamengo
+06/08 - Flamengo x São Paulo
+06/08 - Botafogo x Internacional
+06/08 - Palmeiras x Cruzeiro
+06/08 - Corinthians x Coritiba
+06/08 - Red Bull Bragantino x Vasco
+06/08 - Atlético-MG x Bahia
+06/08 - Grêmio x Fluminense
+06/08 - Athletico-PR x Cuiabá
+06/08 - Fortaleza x Santos
+06/08 - América-MG x Goiás
+13/08 - Fluminense x América-MG
+13/08 - Vasco x Atlético-MG
+13/08 - São Paulo x Botafogo
+13/08 - Santos x Grêmio
+13/08 - Goiás x Athletico-PR
+13/08 - Cruzeiro x Corinthians
+13/08 - Internacional x Fortaleza
+13/08 - Coritiba x Flamengo
+13/08 - Bahia x Red Bull Bragantino
+13/08 - Cuiabá x Palmeiras
+20/08 - Flamengo x Internacional
+20/08 - Botafogo x Bahia
+20/08 - Palmeiras x Vasco
+20/08 - Corinthians x Goiás
+20/08 - Red Bull Bragantino x Cuiabá
+20/08 - Atlético-MG x Santos
+20/08 - Grêmio x Cruzeiro
+20/08 - Athletico-PR x Fluminense
+20/08 - Fortaleza x Coritiba
+20/08 - América-MG x São Paulo
+27/08 - Fluminense x Fortaleza
+27/08 - Botafogo x Flamengo
+27/08 - São Paulo x Coritiba
+27/08 - Corinthians x Palmeiras
+27/08 - Goiás x Internacional
+27/08 - Cruzeiro x Red Bull Bragantino
+27/08 - Grêmio x Cuiabá
+27/08 - Athletico-PR x Atlético-MG
+27/08 - Bahia x Vasco
+27/08 - América-MG x Santos
+03/09 - Flamengo x Athletico-PR
+03/09 - Vasco x Fluminense
+03/09 - Palmeiras x Goiás
+03/09 - Santos x Cruzeiro
+03/09 - Red Bull Bragantino x Grêmio
+03/09 - Atlético-MG x Botafogo
+03/09 - Internacional x São Paulo
+03/09 - Coritiba x Bahia
+03/09 - Fortaleza x Corinthians
+03/09 - Cuiabá x América-MG
+13/09 - Fluminense x Cruzeiro
+13/09 - Vasco x Coritiba
+13/09 - São Paulo x Fortaleza
+13/09 - Corinthians x Botafogo
+13/09 - Goiás x Flamengo
+13/09 - Atlético-MG x Cuiabá
+13/09 - Grêmio x Palmeiras
+13/09 - Athletico-PR x Internacional
+13/09 - Bahia x Santos
+13/09 - América-MG x Red Bull Bragantino
+20/09 - Flamengo x Bahia
+20/09 - Botafogo x Goiás
+20/09 - São Paulo x Corinthians
+20/09 - Santos x Vasco
+20/09 - Red Bull Bragantino x Palmeiras
+20/09 - Cruzeiro x América-MG
+20/09 - Internacional x Atlético-MG
+20/09 - Coritiba x Athletico-PR
+20/09 - Fortaleza x Grêmio
+20/09 - Cuiabá x Fluminense
+01/10 - Fluminense x Botafogo
+01/10 - Vasco x São Paulo
+01/10 - Palmeiras x Santos
+01/10 - Corinthians x Flamengo
+01/10 - Goiás x Bahia
+01/10 - Atlético-MG x Coritiba
+01/10 - Internacional x Grêmio
+01/10 - Athletico-PR x Red Bull Bragantino
+01/10 - Fortaleza x América-MG
+01/10 - Cuiabá x Cruzeiro
+08/10 - Fluminense x Corinthians
+08/10 - Vasco x Fortaleza
+08/10 - Palmeiras x Atlético-MG
+08/10 - Santos x Red Bull Bragantino
+08/10 - Goiás x São Paulo
+08/10 - Cruzeiro x Flamengo
+08/10 - Grêmio x Athletico-PR
+08/10 - Coritiba x Cuiabá
+08/10 - Bahia x Internacional
+08/10 - América-MG x Botafogo
+18/10 - Flamengo x Vasco
+18/10 - Botafogo x Athletico-PR
+18/10 - São Paulo x Grêmio
+18/10 - Corinthians x América-MG
+18/10 - Red Bull Bragantino x Fluminense
+18/10 - Atlético-MG x Cruzeiro
+18/10 - Internacional x Santos
+18/10 - Coritiba x Palmeiras
+18/10 - Bahia x Fortaleza
+18/10 - Cuiabá x Goiás
+22/10 - Fluminense x Goiás
+22/10 - Vasco x Internacional
+22/10 - Palmeiras x São Paulo
+22/10 - Santos x Coritiba
+22/10 - Red Bull Bragantino x Atlético-MG
+22/10 - Cruzeiro x Bahia
+22/10 - Grêmio x Flamengo
+22/10 - Athletico-PR x América-MG
+22/10 - Fortaleza x Botafogo
+22/10 - Cuiabá x Corinthians
+25/10 - Flamengo x Red Bull Bragantino
+25/10 - Botafogo x Cuiabá
+25/10 - Palmeiras x Bahia
+25/10 - Corinthians x Santos
+25/10 - Goiás x Vasco
+25/10 - Atlético-MG x Fluminense
+25/10 - Internacional x Coritiba
+25/10 - Athletico-PR x São Paulo
+25/10 - Fortaleza x Cruzeiro
+25/10 - América-MG x Grêmio
+29/10 - Flamengo x Santos
+29/10 - Botafogo x Palmeiras
+29/10 - São Paulo x Cruzeiro
+29/10 - Corinthians x Athletico-PR
+29/10 - Goiás x Red Bull Bragantino
+29/10 - Atlético-MG x Fortaleza
+29/10 - Internacional x América-MG
+29/10 - Coritiba x Grêmio
+29/10 - Bahia x Fluminense
+29/10 - Cuiabá x Vasco
+01/11 - Fluminense x São Paulo
+01/11 - Vasco x Botafogo
+01/11 - Palmeiras x Athletico-PR
+01/11 - Santos x Cuiabá
+01/11 - Red Bull Bragantino x Corinthians
+01/11 - Cruzeiro x Internacional
+01/11 - Grêmio x Bahia
+01/11 - Coritiba x Goiás
+01/11 - Fortaleza x Flamengo
+01/11 - América-MG x Atlético-MG
+05/11 - Flamengo x Palmeiras
+05/11 - Botafogo x Grêmio
+05/11 - São Paulo x Red Bull Bragantino
+05/11 - Corinthians x Atlético-MG
+05/11 - Goiás x Santos
+05/11 - Cruzeiro x Vasco
+05/11 - Internacional x Fluminense
+05/11 - Athletico-PR x Fortaleza
+05/11 - Bahia x Cuiabá
+05/11 - América-MG x Coritiba
+12/11 - Flamengo x Fluminense
+12/11 - Vasco x América-MG
+12/11 - Palmeiras x Internacional
+12/11 - Santos x São Paulo
+12/11 - Red Bull Bragantino x Botafogo
+12/11 - Atlético-MG x Goiás
+12/11 - Grêmio x Corinthians
+12/11 - Coritiba x Cruzeiro
+12/11 - Bahia x Athletico-PR
+12/11 - Cuiabá x Fortaleza
+22/11 - Fluminense x Coritiba
+22/11 - Botafogo x Santos
+22/11 - São Paulo x Cuiabá
+22/11 - Corinthians x Bahia
+22/11 - Goiás x Cruzeiro
+22/11 - Atlético-MG x Grêmio
+22/11 - Internacional x Red Bull Bragantino
+22/11 - Athletico-PR x Vasco
+22/11 - Fortaleza x Palmeiras
+22/11 - América-MG x Flamengo
+26/11 - Flamengo x Atlético-MG
+26/11 - Vasco x Corinthians
+26/11 - Palmeiras x América-MG
+26/11 - Santos x Fluminense
+26/11 - Red Bull Bragantino x Fortaleza
+26/11 - Cruzeiro x Athletico-PR
+26/11 - Grêmio x Goiás
+26/11 - Coritiba x Botafogo
+26/11 - Bahia x São Paulo
+26/11 - Cuiabá x Internacional
+29/11 - Flamengo x Cuiabá
+29/11 - Botafogo x Cruzeiro
+29/11 - Palmeiras x Fluminense
+29/11 - Corinthians x Internacional
+29/11 - Red Bull Bragantino x Coritiba
+29/11 - Atlético-MG x São Paulo
+29/11 - Grêmio x Vasco
+29/11 - Athletico-PR x Santos
+29/11 - Fortaleza x Goiás
+29/11 - América-MG x Bahia
+03/12 - Fluminense x Grêmio
+03/12 - Vasco x Bragantino
+03/12 - São Paulo x Flamengo
+03/12 - Santos x Fortaleza
+03/12 - Goiás x América-MG
+03/12 - Cruzeiro x Palmeiras
+03/12 - Internacional x Botafogo
+03/12 - Coritiba x Corinthians
+03/12 - Bahia x Atlético-MG
+03/12 - Cuiabá x Athletico-PR
