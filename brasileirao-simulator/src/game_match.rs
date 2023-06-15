@@ -1,7 +1,7 @@
 use crate::team::Team;
 use rand::Rng;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Match {
     pub first_team: String,
     pub second_team: String,
@@ -22,7 +22,7 @@ impl Match {
     pub fn find_teams(
         first_name: String,
         second_name: String,
-        teams_vec: Vec<Team>,
+        teams_vec: [Team; 20],
     ) -> (usize, usize) {
         let first = teams_vec
             .iter()
@@ -40,7 +40,7 @@ impl Match {
         (first, second)
     }
 
-    pub fn simulate_points_game(self, mut teams_vec: Vec<Team>) -> Vec<Team> {
+    pub fn simulate_points_game(self, mut teams_vec: [Team; 20]) -> [Team;20] {
         let mut rng = rand::thread_rng();
         let rng_one: f32 = rng.gen_range(0.0..1.0);
         let rng_two: f32 = rng.gen_range(0.0..1.0);
@@ -60,12 +60,8 @@ impl Match {
             _ => (first_team.tie_points(), second_team.tie_points()),
         };
 
-        teams_vec.remove(first_team_index);
-        teams_vec.remove(second_team_index);
-
-        teams_vec.insert(first_team_index, first_team);
-        teams_vec.insert(first_team_index, second_team);
-
-        teams_vec
+        teams_vec[first_team_index] = first_team;
+        teams_vec[second_team_index] = second_team;
+        teams_vec 
     }
 }
