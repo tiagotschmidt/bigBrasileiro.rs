@@ -44,7 +44,7 @@
 10/05 - Santos x Bahia
 10/05 - Red x América-MG
 10/05 - Cruzeiro x Fluminense
-10/05 - Internacional x Ahtletico-PR
+10/05 - Internacional x Athletico-PR
 10/05 - Coritiba x Vasco
 10/05 - Fortaleza x São
 10/05 - Cuiabá X Atlético-MG
@@ -62,7 +62,7 @@
 21/05 - Botafogo x Fluminense
 21/05 - São x Vasco
 21/05 - Santos x Palmeiras
-21/05 - Red x Athletico
+21/05 - Red x Athletico-PR
 21/05 - Cruzeiro x Cuiabá
 21/05 - Grêmio x Internacional
 21/05 - Coritiba x Atlético-MG
@@ -148,7 +148,7 @@
 16/07 - Athletico-PR x Bahia
 16/07 - Fortaleza x Cuiabá
 16/07 - América-MG x Vasco
-23/07 - Flamengo x América MG
+23/07 - Flamengo x América-MG
 23/07 - Vasco x Athletico-PR
 23/07 - Palmeiras x Fortaleza
 23/07 - Santos x Botafogo
@@ -369,7 +369,7 @@
 29/11 - Fortaleza x Goiás
 29/11 - América-MG x Bahia
 03/12 - Fluminense x Grêmio
-03/12 - Vasco x Bragantino
+03/12 - Vasco x Red
 03/12 - São x Flamengo
 03/12 - Santos x Fortaleza
 03/12 - Goiás x América-MG

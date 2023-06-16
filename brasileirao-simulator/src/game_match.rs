@@ -22,7 +22,7 @@ impl Match {
     pub fn find_teams(
         first_name: String,
         second_name: String,
-        teams_vec: [Team; 20],
+        teams_vec: Vec<Team>,
     ) -> (usize, usize) {
         let first = teams_vec
             .iter()
@@ -40,7 +40,7 @@ impl Match {
         (first, second)
     }
 
-    pub fn simulate_points_game(self, mut teams_vec: [Team; 20]) -> [Team;20] {
+    pub fn simulate_points_game(self, mut teams_vec: Vec<Team>) -> Vec<Team> {
         let mut rng = rand::thread_rng();
         let rng_one: f32 = rng.gen_range(0.0..1.0);
         let rng_two: f32 = rng.gen_range(0.0..1.0);
@@ -51,17 +51,27 @@ impl Match {
         let first_team = teams_vec[first_team_index].clone();
         let second_team = teams_vec[second_team_index].clone();
 
-        let (first_team, second_team) = match (
-            first_team.win_rate >= rng_one,
-            second_team.win_rate >= rng_two,
-        ) {
-            (true, false) => (first_team.win_points(), second_team.lose()),
-            (false, true) => (first_team.lose(), second_team.win_points()),
-            _ => (first_team.tie_points(), second_team.tie_points()),
+        let first_win_rate = if first_team.win_rate == 0.0 {
+            rng.gen_range(0.0..0.5)
+        } else {
+            first_team.win_rate
         };
+
+        let second_win_rate = if second_team.win_rate < 0.1 {
+            rng.gen_range(0.0..0.5)
+        } else {
+            second_team.win_rate
+        };
+
+        let (first_team, second_team) =
+            match (first_win_rate >= rng_one, second_win_rate >= rng_two) {
+                (true, false) => (first_team.win_points(), second_team.lose()),
+                (false, true) => (first_team.lose(), second_team.win_points()),
+                _ => (first_team.tie_points(), second_team.tie_points()),
+            };
 
         teams_vec[first_team_index] = first_team;
         teams_vec[second_team_index] = second_team;
-        teams_vec 
+        teams_vec
     }
 }

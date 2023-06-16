@@ -1,7 +1,7 @@
 #[derive(Clone, Debug)]
 pub struct Team {
     pub name: String,
-    points: u32,
+    pub points: u32,
     wins: u32,
     games: u32,
     pub win_rate: f32,
@@ -45,5 +45,17 @@ impl Team {
         self.games += 1;
         self.points += 1;
         self.update_win_rate()
+    }
+}
+
+impl Default for Team {
+    fn default() -> Self {
+        Team {
+            name: "".to_string(),
+            points: 0,
+            wins: 0,
+            games: 0,
+            win_rate: 0.00,
+        }
     }
 }
