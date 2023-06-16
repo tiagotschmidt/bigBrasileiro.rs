@@ -1,15 +1,15 @@
 use brasileirao_simulator::{game_match::Match, team::Team};
 use std::fs;
 
-const MAX_SIM: i32 = 100000;
+const MAX_SIM: i32 = 1000000;
 
 fn main() {
     let mut internacional_positions = [0; 20];
+    let match_vec = initialize_match_vec();
+    let team_vec = initialize_team_vec();
     for _i in 0..MAX_SIM {
-        let mut team_vec = initialize_team_vec();
-        let match_vec = initialize_match_vec();
-
-        for game_match in match_vec {
+        let mut team_vec = team_vec.clone();
+        for game_match in match_vec.clone() {
             team_vec = game_match.simulate_points_game(team_vec);
         }
 
