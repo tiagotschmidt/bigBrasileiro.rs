@@ -1,17 +1,19 @@
+use brasileirao_simulator::game_match::MatchRegistry;
 use brasileirao_simulator::{game_match::Match, team::Team};
 
 use std::fs;
 use std::thread;
 use std::vec;
 
-const MAX_SIM: u32 = 1_000_000;
-const MAX_THREADS: usize = 16;
+const MAX_SIM: u32 = 1;
+const MAX_THREADS: usize = 1;
 const MAX_TEAMS: usize = 20;
 
 fn main() {
     let all_internacional_positions = [[0; MAX_TEAMS]; MAX_THREADS];
     let mut all_internacional_positions_percentage = [[0.0; MAX_TEAMS]; MAX_THREADS];
     let mut final_internacional_percentage = [0.0; MAX_TEAMS];
+    let mut all_match_history: Vec<Vec<MatchRegistry>> = vec![vec![]];
     let match_vec = initialize_match_vec();
     let team_vec = initialize_team_vec();
 
@@ -20,6 +22,7 @@ fn main() {
     for i in 0..MAX_THREADS {
         let team_vec = team_vec.clone();
         let match_vec = match_vec.clone();
+        let mut all_match_history = all_match_history.get_mut(i).unwrap().clone();
         thread_vec.push(thread::spawn(move || {
             {
                 simulate_championship(
@@ -27,13 +30,17 @@ fn main() {
                     match_vec,
                     all_internacional_positions[i],
                     all_internacional_positions_percentage[i],
+                    all_match_history,
                 )
             }
         }));
     }
 
     for (i, handle) in thread_vec.into_iter().enumerate() {
-        all_internacional_positions_percentage[i] = handle.join().unwrap();
+        (
+            all_internacional_positions_percentage[i],
+            all_match_history[i],
+        ) = handle.join().unwrap();
     }
 
     for (i, _item) in final_internacional_percentage.iter_mut().enumerate() {
@@ -47,6 +54,8 @@ fn main() {
     }
 
     display_result_for_inter("Internacional".to_string(), final_internacional_percentage);
+
+    println!("Teste do pantâno: {:#?}", all_match_history);
 }
 
 fn simulate_championship(
@@ -54,12 +63,13 @@ fn simulate_championship(
     match_vec: Vec<Match>,
     mut internacional_positions: [i32; 20],
     mut internacional_positions_percentage: [f64; 20],
-) -> [f64; 20] {
+    mut match_history: Vec<MatchRegistry>,
+) -> ([f64; 20], Vec<MatchRegistry>) {
     for _i in 0..MAX_SIM / MAX_THREADS as u32 {
         let mut team_vec = team_vec.clone();
 
         for game_match in match_vec.clone() {
-            team_vec = game_match.simulate_points_game(team_vec);
+            (team_vec, match_history) = game_match.simulate_points_game(team_vec, match_history);
         }
         team_vec.sort_by(|a, b| b.points.cmp(&a.points));
 
@@ -72,7 +82,7 @@ fn simulate_championship(
         internacional_positions_percentage[i] =
             internacional_positions[i] as f64 * 100.0 / MAX_SIM as f64;
     }
-    internacional_positions_percentage
+    (internacional_positions_percentage, match_history)
 }
 
 fn search_team_placement(team_name: String, team_vec: Vec<Team>) -> usize {
