@@ -4,7 +4,7 @@ use std::fs;
 use std::thread;
 use std::vec;
 
-const MAX_SIM: u32 = 100_000;
+const MAX_SIM: u32 = 1_000_000;
 const MAX_THREADS: usize = 8;
 const MAX_TEAMS: usize = 20;
 
@@ -70,7 +70,7 @@ fn simulate_championship(
 
     for i in 0..MAX_TEAMS {
         internacional_positions_percentage[i] =
-            internacional_positions[i] as f64 * 100.0 / (MAX_SIM as f64 / MAX_THREADS as f64);
+            internacional_positions[i] as f64 * 100.0 / MAX_SIM as f64;
     }
     internacional_positions_percentage
 }
@@ -96,20 +96,20 @@ fn display_result_for_inter(team_name: String, internacional_positions_percentag
     );
     println!("{}", team_name);
     println!(
-        "Chances de ser Campeão:\t{}%.",
+        "Chances de ser Campeão:     \t{}%.",
         internacional_positions_percentage[0]
     );
     println!(
         "Chances de ser Vice Campeão:\t{}%.",
-        internacional_positions_percentage[0]
+        internacional_positions_percentage[1]
     );
     println!(
-        "Chances de ser Rebaixado:\t{}%.",
+        "Chances de ser Rebaixado:   \t{}%.",
         internacional_positions_percentage[19]
             + internacional_positions_percentage[18]
             + internacional_positions_percentage[17]
             + internacional_positions_percentage[16]
-    )
+    );
 }
 
 fn initialize_match_vec() -> Vec<Match> {
