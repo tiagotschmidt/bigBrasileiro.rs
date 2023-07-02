@@ -3,7 +3,7 @@ pub struct Team {
     pub name: String,
     pub points: u32,
     wins: u32,
-    games: u32,
+    pub games: u32,
     pub win_rate: f32,
 }
 

@@ -40,7 +40,11 @@ impl Match {
         (first, second)
     }
 
-    pub fn simulate_points_game(self, mut teams_vec: Vec<Team>) -> Vec<Team> {
+    pub fn simulate_points_game(
+        self,
+        mut teams_vec: Vec<Team>,
+        mut internacional_first_match_stats: [u32; 3],
+    ) -> (Vec<Team>, [u32; 3]) {
         let mut rng = rand::thread_rng();
         let rng_one: f32 = rng.gen_range(0.0..1.0);
         let rng_two: f32 = rng.gen_range(0.0..1.0);
@@ -64,14 +68,46 @@ impl Match {
         };
 
         let (first_team, second_team) =
-            match (first_win_rate >= rng_one, second_win_rate >= rng_two) {
-                (true, false) => (first_team.win_points(), second_team.lose()),
-                (false, true) => (first_team.lose(), second_team.win_points()),
-                _ => (first_team.tie_points(), second_team.tie_points()),
+            if first_team.name == "Internacional" && first_team.games == 12 {
+                match (first_win_rate >= rng_one, second_win_rate >= rng_two) {
+                    (true, false) => {
+                        internacional_first_match_stats[0] += 1;
+                        (first_team.win_points(), second_team.lose())
+                    }
+                    (false, true) => {
+                        internacional_first_match_stats[2] += 1;
+                        (first_team.lose(), second_team.win_points())
+                    }
+                    _ => {
+                        internacional_first_match_stats[1] += 1;
+                        (first_team.tie_points(), second_team.tie_points())
+                    }
+                }
+            } else if second_team.name == "Internacional" && second_team.games == 12 {
+                match (first_win_rate >= rng_one, second_win_rate >= rng_two) {
+                    (true, false) => {
+                        internacional_first_match_stats[2] += 1;
+                        (first_team.win_points(), second_team.lose())
+                    }
+                    (false, true) => {
+                        internacional_first_match_stats[0] += 1;
+                        (first_team.lose(), second_team.win_points())
+                    }
+                    _ => {
+                        internacional_first_match_stats[1] += 1;
+                        (first_team.tie_points(), second_team.tie_points())
+                    }
+                }
+            } else {
+                match (first_win_rate >= rng_one, second_win_rate >= rng_two) {
+                    (true, false) => (first_team.win_points(), second_team.lose()),
+                    (false, true) => (first_team.lose(), second_team.win_points()),
+                    _ => (first_team.tie_points(), second_team.tie_points()),
+                }
             };
 
         teams_vec[first_team_index] = first_team;
         teams_vec[second_team_index] = second_team;
-        teams_vec
+        (teams_vec, internacional_first_match_stats)
     }
 }

@@ -4,14 +4,17 @@ use std::fs;
 use std::thread;
 use std::vec;
 
-const MAX_SIM: u32 = 1_000_000;
+const MAX_SIM: u32 = 1_000;
 const MAX_THREADS: usize = 8;
 const MAX_TEAMS: usize = 20;
 
 fn main() {
     let all_internacional_positions = [[0; MAX_TEAMS]; MAX_THREADS];
+    let all_internacional_first_match_stats = [[0; 3]; MAX_THREADS];
     let mut all_internacional_positions_percentage = [[0.0; MAX_TEAMS]; MAX_THREADS];
+    let mut all_internacional_first_match_percentage = [[0.0; 3]; MAX_THREADS];
     let mut final_internacional_percentage = [0.0; MAX_TEAMS];
+    let mut final_internacional_first_match_percentage = [0.0; 3];
     let match_vec = initialize_match_vec();
     let team_vec = initialize_team_vec();
 
@@ -27,13 +30,18 @@ fn main() {
                     match_vec,
                     all_internacional_positions[i],
                     all_internacional_positions_percentage[i],
+                    all_internacional_first_match_stats[i],
+                    all_internacional_first_match_percentage[i],
                 )
             }
         }));
     }
 
     for (i, handle) in thread_vec.into_iter().enumerate() {
-        all_internacional_positions_percentage[i] = handle.join().unwrap();
+        (
+            all_internacional_positions_percentage[i],
+            all_internacional_first_match_percentage[i],
+        ) = handle.join().unwrap();
     }
 
     for (i, _item) in final_internacional_percentage.iter_mut().enumerate() {
@@ -46,20 +54,40 @@ fn main() {
         *_item = acc;
     }
 
-    display_result_for_inter("Internacional".to_string(), final_internacional_percentage);
+    for (i, _item) in final_internacional_first_match_percentage
+        .iter_mut()
+        .enumerate()
+    {
+        let mut acc = 0.0;
+
+        for item in all_internacional_first_match_percentage.iter() {
+            acc += item[i];
+        }
+
+        *_item = acc;
+    }
+
+    display_result_for_inter(
+        "Internacional".to_string(),
+        final_internacional_percentage,
+        final_internacional_first_match_percentage,
+    );
 }
 
 fn simulate_championship(
     team_vec: Vec<Team>,
     match_vec: Vec<Match>,
-    mut internacional_positions: [i32; 20],
+    mut internacional_positions: [u32; 20],
     mut internacional_positions_percentage: [f64; 20],
-) -> [f64; 20] {
+    mut internacional_first_match_stats: [u32; 3],
+    mut internacional_first_match_percentage: [f64; 3],
+) -> ([f64; 20], [f64; 3]) {
     for _i in 0..MAX_SIM / MAX_THREADS as u32 {
         let mut team_vec = team_vec.clone();
 
         for game_match in match_vec.clone() {
-            team_vec = game_match.simulate_points_game(team_vec);
+            (team_vec, internacional_first_match_stats) =
+                game_match.simulate_points_game(team_vec, internacional_first_match_stats);
         }
         team_vec.sort_by(|a, b| b.points.cmp(&a.points));
 
@@ -72,7 +100,16 @@ fn simulate_championship(
         internacional_positions_percentage[i] =
             internacional_positions[i] as f64 * 100.0 / MAX_SIM as f64;
     }
-    internacional_positions_percentage
+
+    for i in 0..3 {
+        internacional_first_match_percentage[i] =
+            internacional_first_match_stats[i] as f64 * 100.0 / MAX_SIM as f64;
+    }
+
+    (
+        internacional_positions_percentage,
+        internacional_first_match_percentage,
+    )
 }
 
 fn search_team_placement(team_name: String, team_vec: Vec<Team>) -> usize {
@@ -89,7 +126,11 @@ fn search_team_placement(team_name: String, team_vec: Vec<Team>) -> usize {
     }
 }
 
-fn display_result_for_inter(team_name: String, internacional_positions_percentage: [f64; 20]) {
+fn display_result_for_inter(
+    team_name: String,
+    internacional_positions_percentage: [f64; 20],
+    final_internacional_first_match_percentage: [f64; 3],
+) {
     println!(
         "###################\tResumo de Simulação com {} repetições e {} threads\t###################",
         MAX_SIM, MAX_THREADS
@@ -109,6 +150,19 @@ fn display_result_for_inter(team_name: String, internacional_positions_percentag
             + internacional_positions_percentage[18]
             + internacional_positions_percentage[17]
             + internacional_positions_percentage[16]
+    );
+
+    println!(
+        "Chances de vencer a primeira partida:\t{}%.",
+        final_internacional_first_match_percentage[0]
+    );
+    println!(
+        "Chances de perder a primeira partida:\t{}%.",
+        final_internacional_first_match_percentage[2]
+    );
+    println!(
+        "Chances de empatar a primeira partida:\t{}%.",
+        final_internacional_first_match_percentage[1]
     );
 }
 
