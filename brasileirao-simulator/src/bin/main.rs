@@ -142,15 +142,15 @@ fn simulate_championship(
 fn display_result(team_name: String, internacional_positions_percentage: [f64; 20]) {
     println!("{}", team_name);
     println!(
-        "Chances de ser Campeão:     \t{}%.",
+        "Chances de ser Campeão:     \t{:.2}%.",
         internacional_positions_percentage[0]
     );
     println!(
-        "Chances de ser Vice Campeão:\t{}%.",
+        "Chances de ser Vice Campeão:\t{:.2}%.",
         internacional_positions_percentage[1]
     );
     println!(
-        "Chances de ser Rebaixado:   \t{}%.",
+        "Chances de ser Rebaixado:   \t{:.2}%.",
         internacional_positions_percentage[19]
             + internacional_positions_percentage[18]
             + internacional_positions_percentage[17]
