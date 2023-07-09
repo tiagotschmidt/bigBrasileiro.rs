@@ -1,3 +1,5 @@
+use std::fs;
+
 use crate::team::Team;
 use rand::Rng;
 
@@ -110,4 +112,14 @@ impl Match {
         teams_vec[second_team_index] = second_team;
         (teams_vec, internacional_first_match_stats)
     }
+}
+
+pub fn initialize_match_vec() -> Vec<Match> {
+    let mut match_vec: Vec<Match> = Vec::with_capacity(380);
+    let content = fs::read_to_string("../jogos13-06.txt").expect("Deve existir esse arquivo.");
+    for part in content.lines() {
+        let current_match = Match::new(part);
+        match_vec.push(current_match);
+    }
+    match_vec
 }

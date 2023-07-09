@@ -1,22 +1,26 @@
+use brasileirao_simulator::game_match::initialize_match_vec;
+use brasileirao_simulator::team::initialize_team_vec;
 use brasileirao_simulator::{game_match::Match, team::Team};
 
-use std::fs;
 use std::thread;
 use std::vec;
 
-const MAX_SIM: u32 = 1_000;
-const MAX_THREADS: usize = 8;
+const MAX_SIM: u32 = 1_000_000;
+const MAX_THREADS: usize = 16;
 const MAX_TEAMS: usize = 20;
 
 fn main() {
-    let all_internacional_positions = [[0; MAX_TEAMS]; MAX_THREADS];
-    let all_internacional_first_match_stats = [[0; 3]; MAX_THREADS];
-    let mut all_internacional_positions_percentage = [[0.0; MAX_TEAMS]; MAX_THREADS];
-    let mut all_internacional_first_match_percentage = [[0.0; 3]; MAX_THREADS];
-    let mut final_internacional_percentage = [0.0; MAX_TEAMS];
-    let mut final_internacional_first_match_percentage = [0.0; 3];
     let match_vec = initialize_match_vec();
     let team_vec = initialize_team_vec();
+    let team_vec_for_display = initialize_team_vec();
+
+    let all_internacional_first_match_stats = [[0; 3]; MAX_THREADS];
+    let mut all_internacional_first_match_percentage = [[0.0; 3]; MAX_THREADS];
+    let mut final_internacional_first_match_percentage = [0.0; 3];
+
+    let all_teams_positions = [[[0; MAX_TEAMS]; MAX_TEAMS]; MAX_THREADS];
+    let mut all_teams_positions_percentage = [[[0.0; MAX_TEAMS]; MAX_TEAMS]; MAX_THREADS];
+    let final_percentages = [[0.0; MAX_TEAMS]; MAX_TEAMS];
 
     let mut thread_vec = vec![];
 
@@ -28,8 +32,8 @@ fn main() {
                 simulate_championship(
                     team_vec,
                     match_vec,
-                    all_internacional_positions[i],
-                    all_internacional_positions_percentage[i],
+                    all_teams_positions[i],
+                    all_teams_positions_percentage[i],
                     all_internacional_first_match_stats[i],
                     all_internacional_first_match_percentage[i],
                 )
@@ -39,20 +43,42 @@ fn main() {
 
     for (i, handle) in thread_vec.into_iter().enumerate() {
         (
-            all_internacional_positions_percentage[i],
+            all_teams_positions_percentage[i],
             all_internacional_first_match_percentage[i],
         ) = handle.join().unwrap();
     }
 
-    for (i, _item) in final_internacional_percentage.iter_mut().enumerate() {
-        let mut acc = 0.0;
+    let (final_internacional_first_match_percentage, final_percentages) =
+        accumulate_all_threads_results(
+            final_percentages,
+            all_teams_positions_percentage,
+            &mut final_internacional_first_match_percentage,
+            all_internacional_first_match_percentage,
+        );
 
-        for item in all_internacional_positions_percentage.iter() {
-            acc += item[i];
-        }
+    display_header_result(*final_internacional_first_match_percentage);
 
-        *_item = acc;
+    for team in team_vec_for_display.iter() {
+        display_result(
+            team.name.to_string(),
+            final_percentages[team.original_index],
+        );
     }
+}
+
+fn accumulate_all_threads_results(
+    mut final_percentages: [[f64; MAX_TEAMS]; MAX_TEAMS],
+    all_teams_positions_percentage: [[[f64; MAX_TEAMS]; MAX_TEAMS]; MAX_THREADS],
+    final_internacional_first_match_percentage: &mut [f64; 3],
+    all_internacional_first_match_percentage: [[f64; 3]; MAX_THREADS],
+) -> (&mut [f64; 3], [[f64; MAX_TEAMS]; MAX_TEAMS]) {
+    (0..MAX_TEAMS).for_each(|i| {
+        (0..MAX_THREADS).for_each(|j| {
+            for k in 0..MAX_TEAMS {
+                final_percentages[i][k] += all_teams_positions_percentage[j][i][k];
+            }
+        });
+    });
 
     for (i, _item) in final_internacional_first_match_percentage
         .iter_mut()
@@ -67,21 +93,20 @@ fn main() {
         *_item = acc;
     }
 
-    display_result_for_inter(
-        "Internacional".to_string(),
-        final_internacional_percentage,
+    (
         final_internacional_first_match_percentage,
-    );
+        final_percentages,
+    )
 }
 
 fn simulate_championship(
     team_vec: Vec<Team>,
     match_vec: Vec<Match>,
-    mut internacional_positions: [u32; 20],
-    mut internacional_positions_percentage: [f64; 20],
+    mut teams_positions: [[u32; MAX_TEAMS]; MAX_TEAMS],
+    mut teams_positions_percentage: [[f64; MAX_TEAMS]; MAX_TEAMS],
     mut internacional_first_match_stats: [u32; 3],
     mut internacional_first_match_percentage: [f64; 3],
-) -> ([f64; 20], [f64; 3]) {
+) -> ([[f64; MAX_TEAMS]; MAX_TEAMS], [f64; 3]) {
     for _i in 0..MAX_SIM / MAX_THREADS as u32 {
         let mut team_vec = team_vec.clone();
 
@@ -91,15 +116,17 @@ fn simulate_championship(
         }
         team_vec.sort_by(|a, b| b.points.cmp(&a.points));
 
-        let internacional_current_position =
-            search_team_placement("Internacional".to_string(), team_vec);
-        internacional_positions[internacional_current_position] += 1;
+        for (i, team) in team_vec.iter().enumerate() {
+            teams_positions[team.original_index][i] += 1;
+        }
     }
 
-    for i in 0..MAX_TEAMS {
-        internacional_positions_percentage[i] =
-            internacional_positions[i] as f64 * 100.0 / MAX_SIM as f64;
-    }
+    (0..MAX_TEAMS).for_each(|i| {
+        for j in 0..MAX_TEAMS {
+            teams_positions_percentage[i][j] =
+                teams_positions[i][j] as f64 * 100.0 / MAX_SIM as f64;
+        }
+    });
 
     for i in 0..3 {
         internacional_first_match_percentage[i] =
@@ -107,34 +134,12 @@ fn simulate_championship(
     }
 
     (
-        internacional_positions_percentage,
+        teams_positions_percentage,
         internacional_first_match_percentage,
     )
 }
 
-fn search_team_placement(team_name: String, team_vec: Vec<Team>) -> usize {
-    let mut team_iter = team_vec.iter();
-    let mut team = team_iter.next().unwrap();
-    let mut counter = 0;
-
-    loop {
-        if team.name == team_name {
-            break counter;
-        }
-        counter += 1;
-        team = team_iter.next().unwrap();
-    }
-}
-
-fn display_result_for_inter(
-    team_name: String,
-    internacional_positions_percentage: [f64; 20],
-    final_internacional_first_match_percentage: [f64; 3],
-) {
-    println!(
-        "###################\tResumo de Simulação com {} repetições e {} threads\t###################",
-        MAX_SIM, MAX_THREADS
-    );
+fn display_result(team_name: String, internacional_positions_percentage: [f64; 20]) {
     println!("{}", team_name);
     println!(
         "Chances de ser Campeão:     \t{}%.",
@@ -151,6 +156,13 @@ fn display_result_for_inter(
             + internacional_positions_percentage[17]
             + internacional_positions_percentage[16]
     );
+}
+
+fn display_header_result(final_internacional_first_match_percentage: [f64; 3]) {
+    println!(
+        "###################\tResumo de Simulação com {} repetições e {} threads\t###################",
+        MAX_SIM, MAX_THREADS
+    );
 
     println!(
         "Chances de vencer a primeira partida:\t{}%.",
@@ -164,46 +176,4 @@ fn display_result_for_inter(
         "Chances de empatar a primeira partida:\t{}%.",
         final_internacional_first_match_percentage[1]
     );
-}
-
-fn initialize_match_vec() -> Vec<Match> {
-    let mut match_vec: Vec<Match> = Vec::with_capacity(380);
-    let content = fs::read_to_string("../jogos13-06.txt").expect("Deve existir esse arquivo.");
-    for part in content.lines() {
-        let current_match = Match::new(part);
-        match_vec.push(current_match);
-    }
-    match_vec
-}
-
-fn initialize_team_vec() -> Vec<Team> {
-    let mut team_vec: Vec<Team> = Vec::with_capacity(20);
-    let content = fs::read_to_string("../times13-06.txt").expect("Deve existir esse arquivo.");
-    for part in content.lines() {
-        let subparts = part.split('>').collect::<Vec<_>>();
-        let name = subparts[78].split('<').next().unwrap();
-        let points: u32 = subparts[81]
-            .split('<')
-            .next()
-            .unwrap()
-            .parse::<u32>()
-            .unwrap();
-        let wins: u32 = subparts[85]
-            .split('<')
-            .next()
-            .unwrap()
-            .parse::<u32>()
-            .unwrap();
-        let games: u32 = subparts[83]
-            .split('<')
-            .next()
-            .unwrap()
-            .parse::<u32>()
-            .unwrap();
-
-        let mut current_team = Team::new(name.to_string(), points, wins, games, 0.0);
-        current_team = current_team.update_win_rate();
-        team_vec.push(current_team);
-    }
-    team_vec
 }
