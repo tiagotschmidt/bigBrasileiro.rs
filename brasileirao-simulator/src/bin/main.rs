@@ -1,3 +1,4 @@
+use brasileirao_simulator::display_results::{display_header_result, display_summary_result};
 use brasileirao_simulator::game_match::initialize_match_vec;
 use brasileirao_simulator::team::initialize_team_vec;
 use brasileirao_simulator::{game_match::Match, team::Team};
@@ -56,10 +57,14 @@ fn main() {
             all_internacional_first_match_percentage,
         );
 
-    display_header_result(*final_internacional_first_match_percentage);
+    display_header_result(
+        *final_internacional_first_match_percentage,
+        MAX_SIM,
+        MAX_THREADS,
+    );
 
     for team in team_vec_for_display.iter() {
-        display_result(
+        display_summary_result(
             team.name.to_string(),
             final_percentages[team.original_index],
         );
@@ -137,43 +142,4 @@ fn simulate_championship(
         teams_positions_percentage,
         internacional_first_match_percentage,
     )
-}
-
-fn display_result(team_name: String, internacional_positions_percentage: [f64; 20]) {
-    println!("{}", team_name);
-    println!(
-        "Chances de ser Campeão:     \t{:.2}%.",
-        internacional_positions_percentage[0]
-    );
-    println!(
-        "Chances de ser Vice Campeão:\t{:.2}%.",
-        internacional_positions_percentage[1]
-    );
-    println!(
-        "Chances de ser Rebaixado:   \t{:.2}%.",
-        internacional_positions_percentage[19]
-            + internacional_positions_percentage[18]
-            + internacional_positions_percentage[17]
-            + internacional_positions_percentage[16]
-    );
-}
-
-fn display_header_result(final_internacional_first_match_percentage: [f64; 3]) {
-    println!(
-        "###################\tResumo de Simulação com {} repetições e {} threads\t###################",
-        MAX_SIM, MAX_THREADS
-    );
-
-    println!(
-        "Chances de vencer a primeira partida:\t{}%.",
-        final_internacional_first_match_percentage[0]
-    );
-    println!(
-        "Chances de perder a primeira partida:\t{}%.",
-        final_internacional_first_match_percentage[2]
-    );
-    println!(
-        "Chances de empatar a primeira partida:\t{}%.",
-        final_internacional_first_match_percentage[1]
-    );
 }
