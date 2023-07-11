@@ -1,4 +1,6 @@
-use brasileirao_simulator::display_results::{display_header_result, display_summary_result};
+use brasileirao_simulator::display_results::{
+    display_header_result, generate_teams_full_log, generate_teams_summary_log,
+};
 use brasileirao_simulator::game_match::initialize_match_vec;
 use brasileirao_simulator::team::initialize_team_vec;
 use brasileirao_simulator::{game_match::Match, team::Team};
@@ -63,12 +65,15 @@ fn main() {
         MAX_THREADS,
     );
 
-    for team in team_vec_for_display.iter() {
-        display_summary_result(
-            team.name.to_string(),
-            final_percentages[team.original_index],
-        );
-    }
+    generate_teams_full_log(team_vec_for_display.clone(), final_percentages);
+    generate_teams_summary_log(team_vec_for_display, final_percentages);
+
+    // for team in team_vec_for_display.iter() {
+    //     display_summary_result(
+    //         team.name.to_string(),
+    //         final_percentages[team.original_index],
+    //     );
+    // }
 }
 
 fn accumulate_all_threads_results(
