@@ -66,8 +66,8 @@ impl Display for Team {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
-            "{};{};{};{};{}",
-            self.name, self.points, self.wins, self.games, self.win_rate
+            "{};{};{};{}",
+            self.name, self.points, self.wins, self.games
         )
     }
 }
@@ -114,7 +114,15 @@ fn read_team_from_line(part: &str, i: usize) -> Team {
     current_team
 }
 
-#[test]
-fn test_read_team_from_line() {
-    let _team_vec = initialize_team_vec();
-}
+// #[test]
+// fn test() {
+//     let mut team_vec = initialize_team_vec();
+//     let output_file =
+//         File::create("jogos31-07_new.txt").expect("Não foi possível criar o arquivo.");
+
+//     team_vec.sort_by(|a, b| b.points.cmp(&a.points));
+
+//     for team in team_vec {
+//         writeln!(&output_file, "{}", team).unwrap();
+//     }
+// }
