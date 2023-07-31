@@ -1,0 +1,210 @@
+02/08;Fluminense;Palmeiras
+02/08;Vasco;Grêmio
+02/08;São Paulo;Atlético-MG
+02/08;Santos;Athletico-PR
+02/08;Goiás;Fortaleza
+02/08;Cruzeiro;Botafogo
+02/08;Internacional;Corinthians
+02/08;Coritiba;Red Bull Bragantino
+02/08;Bahia;América-MG
+02/08;Cuiabá;Flamengo
+06/08;Flamengo;São Paulo
+06/08;Botafogo;Internacional
+06/08;Palmeiras;Cruzeiro
+06/08;Corinthians;Coritiba
+06/08;Red Bull Bragantino;Vasco
+06/08;Atlético-MG;Bahia
+06/08;Grêmio;Fluminense
+06/08;Athletico-PR;Cuiabá
+06/08;Fortaleza;Santos
+06/08;América-MG;Goiás
+13/08;Fluminense;América-MG
+13/08;Vasco;Atlético-MG
+13/08;São Paulo;Botafogo
+13/08;Santos;Grêmio
+13/08;Goiás;Athletico-PR
+13/08;Cruzeiro;Corinthians
+13/08;Internacional;Fortaleza
+13/08;Coritiba;Flamengo
+13/08;Bahia;Red Bull Bragantino
+13/08;Cuiabá;Palmeiras
+20/08;Flamengo;Internacional
+20/08;Botafogo;Bahia
+20/08;Palmeiras;Vasco
+20/08;Corinthians;Goiás
+20/08;Red Bull Bragantino;Cuiabá
+20/08;Atlético-MG;Santos
+20/08;Grêmio;Cruzeiro
+20/08;Athletico-PR;Fluminense
+20/08;Fortaleza;Coritiba
+20/08;América-MG;São Paulo
+27/08;Fluminense;Fortaleza
+27/08;Botafogo;Flamengo
+27/08;São Paulo;Coritiba
+27/08;Corinthians;Palmeiras
+27/08;Goiás;Internacional
+27/08;Cruzeiro;Red Bull Bragantino
+27/08;Grêmio;Cuiabá
+27/08;Athletico-PR;Atlético-MG
+27/08;Bahia;Vasco
+27/08;América-MG;Santos
+03/09;Flamengo;Athletico-PR
+03/09;Vasco;Fluminense
+03/09;Palmeiras;Goiás
+03/09;Santos;Cruzeiro
+03/09;Red Bull Bragantino;Grêmio
+03/09;Atlético-MG;Botafogo
+03/09;Internacional;São Paulo
+03/09;Coritiba;Bahia
+03/09;Fortaleza;Corinthians
+03/09;Cuiabá;América-MG
+13/09;Fluminense;Cruzeiro
+13/09;Vasco;Coritiba
+13/09;São Paulo;Fortaleza
+13/09;Corinthians;Botafogo
+13/09;Goiás;Flamengo
+13/09;Atlético-MG;Cuiabá
+13/09;Grêmio;Palmeiras
+13/09;Athletico-PR;Internacional
+13/09;Bahia;Santos
+13/09;América-MG;Red Bull Bragantino
+20/09;Flamengo;Bahia
+20/09;Botafogo;Goiás
+20/09;São Paulo;Corinthians
+20/09;Santos;Vasco
+20/09;Red Bull Bragantino;Palmeiras
+20/09;Cruzeiro;América-MG
+20/09;Internacional;Atlético-MG
+20/09;Coritiba;Athletico-PR
+20/09;Fortaleza;Grêmio
+20/09;Cuiabá;Fluminense
+01/10;Fluminense;Botafogo
+01/10;Vasco;São Paulo
+01/10;Palmeiras;Santos
+01/10;Corinthians;Flamengo
+01/10;Goiás;Bahia
+01/10;Atlético-MG;Coritiba
+01/10;Internacional;Grêmio
+01/10;Athletico-PR;Red Bull Bragantino
+01/10;Fortaleza;América-MG
+01/10;Cuiabá;Cruzeiro
+08/10;Fluminense;Corinthians
+08/10;Vasco;Fortaleza
+08/10;Palmeiras;Atlético-MG
+08/10;Santos;Red Bull Bragantino
+08/10;Goiás;São Paulo
+08/10;Cruzeiro;Flamengo
+08/10;Grêmio;Athletico-PR
+08/10;Coritiba;Cuiabá
+08/10;Bahia;Internacional
+08/10;América-MG;Botafogo
+18/10;Flamengo;Vasco
+18/10;Botafogo;Athletico-PR
+18/10;São Paulo;Grêmio
+18/10;Corinthians;América-MG
+18/10;Red Bull Bragantino;Fluminense
+18/10;Atlético-MG;Cruzeiro
+18/10;Internacional;Santos
+18/10;Coritiba;Palmeiras
+18/10;Bahia;Fortaleza
+18/10;Cuiabá;Goiás
+22/10;Fluminense;Goiás
+22/10;Vasco;Internacional
+22/10;Palmeiras;São Paulo
+22/10;Santos;Coritiba
+22/10;Red Bull Bragantino;Atlético-MG
+22/10;Cruzeiro;Bahia
+22/10;Grêmio;Flamengo
+22/10;Athletico-PR;América-MG
+22/10;Fortaleza;Botafogo
+22/10;Cuiabá;Corinthians
+25/10;Flamengo;Red Bull Bragantino
+25/10;Botafogo;Cuiabá
+25/10;Palmeiras;Bahia
+25/10;Corinthians;Santos
+25/10;Goiás;Vasco
+25/10;Atlético-MG;Fluminense
+25/10;Internacional;Coritiba
+25/10;Athletico-PR;São Paulo
+25/10;Fortaleza;Cruzeiro
+25/10;América-MG;Grêmio
+29/10;Flamengo;Santos
+29/10;Botafogo;Palmeiras
+29/10;São Paulo;Cruzeiro
+29/10;Corinthians;Athletico-PR
+29/10;Goiás;Red Bull Bragantino
+29/10;Atlético-MG;Fortaleza
+29/10;Internacional;América-MG
+29/10;Coritiba;Grêmio
+29/10;Bahia;Fluminense
+29/10;Cuiabá;Vasco
+01/11;Fluminense;São Paulo
+01/11;Vasco;Botafogo
+01/11;Palmeiras;Athletico-PR
+01/11;Santos;Cuiabá
+01/11;Red Bull Bragantino;Corinthians
+01/11;Cruzeiro;Internacional
+01/11;Grêmio;Bahia
+01/11;Coritiba;Goiás
+01/11;Fortaleza;Flamengo
+01/11;América-MG;Atlético-MG
+05/11;Flamengo;Palmeiras
+05/11;Botafogo;Grêmio
+05/11;São Paulo;Red Bull Bragantino
+05/11;Corinthians;Atlético-MG
+05/11;Goiás;Santos
+05/11;Cruzeiro;Vasco
+05/11;Internacional;Fluminense
+05/11;Athletico-PR;Fortaleza
+05/11;Bahia;Cuiabá
+05/11;América-MG;Coritiba
+12/11;Flamengo;Fluminense
+12/11;Vasco;América-MG
+12/11;Palmeiras;Internacional
+12/11;Santos;São Paulo
+12/11;Red Bull Bragantino;Botafogo
+12/11;Atlético-MG;Goiás
+12/11;Grêmio;Corinthians
+12/11;Coritiba;Cruzeiro
+12/11;Bahia;Athletico-PR
+12/11;Cuiabá;Fortaleza
+22/11;Fluminense;Coritiba
+22/11;Botafogo;Santos
+22/11;São Paulo;Cuiabá
+22/11;Corinthians;Bahia
+22/11;Goiás;Cruzeiro
+22/11;Atlético-MG;Grêmio
+22/11;Internacional;Red Bull Bragantino
+22/11;Athletico-PR;Vasco
+22/11;Fortaleza;Palmeiras
+22/11;América-MG;Flamengo
+26/11;Flamengo;Atlético-MG
+26/11;Vasco;Corinthians
+26/11;Palmeiras;América-MG
+26/11;Santos;Fluminense
+26/11;Red Bull Bragantino;Fortaleza
+26/11;Cruzeiro;Athletico-PR
+26/11;Grêmio;Goiás
+26/11;Coritiba;Botafogo
+26/11;Bahia;São Paulo
+26/11;Cuiabá;Internacional
+29/11;Flamengo;Cuiabá
+29/11;Botafogo;Cruzeiro
+29/11;Palmeiras;Fluminense
+29/11;Corinthians;Internacional
+29/11;Red Bull Bragantino;Coritiba
+29/11;Atlético-MG;São Paulo
+29/11;Grêmio;Vasco
+29/11;Athletico-PR;Santos
+29/11;Fortaleza;Goiás
+29/11;América-MG;Bahia
+03/12;Fluminense;Grêmio
+03/12;Vasco;Red Bull Bragantino
+03/12;São Paulo;Flamengo
+03/12;Santos;Fortaleza
+03/12;Goiás;América-MG
+03/12;Cruzeiro;Palmeiras
+03/12;Internacional;Botafogo
+03/12;Coritiba;Corinthians
+03/12;Bahia;Atlético-MG
+03/12;Cuiabá;Athletico-PR

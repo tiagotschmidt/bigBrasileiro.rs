@@ -1,4 +1,7 @@
-use std::fs;
+use std::{
+    fmt::Display,
+    fs::{self},
+};
 
 use crate::team::Team;
 use rand::Rng;
@@ -7,17 +10,26 @@ use rand::Rng;
 pub struct Match {
     pub first_team: String,
     pub second_team: String,
+    date: String,
+}
+
+impl Display for Match {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{};{};{}", self.date, self.first_team, self.second_team)
+    }
 }
 
 impl Match {
     pub fn new(match_string: &str) -> Self {
-        let subparts = match_string.split(' ').collect::<Vec<_>>();
-        let first_team = subparts[2];
-        let second_team = subparts[4];
+        let subparts = match_string.split(';').collect::<Vec<_>>();
+        let date = subparts[0];
+        let first_team = subparts[1];
+        let second_team = subparts[2];
 
         Match {
             first_team: first_team.to_string(),
             second_team: second_team.to_string(),
+            date: date.to_string(),
         }
     }
 
@@ -116,7 +128,7 @@ impl Match {
 
 pub fn initialize_match_vec() -> Vec<Match> {
     let mut match_vec: Vec<Match> = Vec::with_capacity(380);
-    let content = fs::read_to_string("../jogos13-06.txt").expect("Deve existir esse arquivo.");
+    let content = fs::read_to_string("../jogos31-07.txt").expect("Deve existir esse arquivo.");
     for part in content.lines() {
         let current_match = Match::new(part);
         match_vec.push(current_match);

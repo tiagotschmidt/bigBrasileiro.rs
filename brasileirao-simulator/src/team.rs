@@ -1,4 +1,7 @@
-use std::fs;
+use std::{
+    fmt::Display,
+    fs::{self},
+};
 
 #[derive(Clone, Debug)]
 pub struct Team {
@@ -59,6 +62,16 @@ impl Team {
     }
 }
 
+impl Display for Team {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "{};{};{};{};{}",
+            self.name, self.points, self.wins, self.games, self.win_rate
+        )
+    }
+}
+
 impl Default for Team {
     fn default() -> Self {
         Team {
@@ -74,32 +87,34 @@ impl Default for Team {
 
 pub fn initialize_team_vec() -> Vec<Team> {
     let mut team_vec: Vec<Team> = Vec::with_capacity(20);
-    let content = fs::read_to_string("../times13-06.txt").expect("Deve existir esse arquivo.");
+    let content = fs::read_to_string("../times31-07.txt").expect("Deve existir esse arquivo.");
     for (i, part) in content.lines().enumerate() {
-        let subparts = part.split('>').collect::<Vec<_>>();
-        let name = subparts[78].split('<').next().unwrap();
-        let points: u32 = subparts[81]
-            .split('<')
-            .next()
-            .unwrap()
-            .parse::<u32>()
-            .unwrap();
-        let wins: u32 = subparts[85]
-            .split('<')
-            .next()
-            .unwrap()
-            .parse::<u32>()
-            .unwrap();
-        let games: u32 = subparts[83]
-            .split('<')
-            .next()
-            .unwrap()
-            .parse::<u32>()
-            .unwrap();
-
-        let mut current_team = Team::new(name.to_string(), points, wins, games, 0.0, i);
-        current_team = current_team.update_win_rate();
+        let current_team = read_team_from_line(part, i);
         team_vec.push(current_team);
     }
     team_vec
+}
+
+fn read_team_from_line(part: &str, i: usize) -> Team {
+    let subparts = part.split(';').collect::<Vec<_>>();
+
+    let name = subparts[0];
+    let points = subparts[1]
+        .parse::<u32>()
+        .expect("Deveria haver um valor de pontos aqui.");
+    let wins = subparts[2]
+        .parse::<u32>()
+        .expect("Deveria haver um valor de pontos aqui.");
+    let games = subparts[3]
+        .parse::<u32>()
+        .expect("Deveria haver um valor de pontos aqui.");
+
+    let mut current_team = Team::new(name.to_string(), points, wins, games, 0.0, i);
+    current_team = current_team.update_win_rate();
+    current_team
+}
+
+#[test]
+fn test_read_team_from_line() {
+    let _team_vec = initialize_team_vec();
 }
