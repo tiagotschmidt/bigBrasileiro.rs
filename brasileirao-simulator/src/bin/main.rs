@@ -68,13 +68,6 @@ fn main() {
 
     generate_teams_full_log(team_vec_for_display.clone(), final_percentages);
     generate_teams_summary_log(team_vec_for_display, final_percentages);
-
-    // for team in team_vec_for_display.iter() {
-    //     display_summary_result(
-    //         team.name.to_string(),
-    //         final_percentages[team.original_index],
-    //     );
-    // }
 }
 
 fn accumulate_all_threads_results(
