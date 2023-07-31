@@ -8,9 +8,10 @@ use brasileirao_simulator::{game_match::Match, team::Team};
 use std::thread;
 use std::vec;
 
-const MAX_SIM: u32 = 1_000_000;
+const MAX_SIM: u32 = 1_000;
 const MAX_THREADS: usize = 16;
 const MAX_TEAMS: usize = 20;
+const FIRST_MATCH_INDEX: u32 = 17;
 
 fn main() {
     let match_vec = initialize_match_vec();
@@ -121,8 +122,11 @@ fn simulate_championship(
         let mut team_vec = team_vec.clone();
 
         for game_match in match_vec.clone() {
-            (team_vec, internacional_first_match_stats) =
-                game_match.simulate_points_game(team_vec, internacional_first_match_stats);
+            (team_vec, internacional_first_match_stats) = game_match.simulate_points_game(
+                FIRST_MATCH_INDEX,
+                team_vec,
+                internacional_first_match_stats,
+            );
         }
         team_vec.sort_by(|a, b| b.points.cmp(&a.points));
 
