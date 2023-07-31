@@ -1,20 +1,20 @@
-Botafogo;43;14;17;0.8333333
-Palmeiras;31;8;17;0.5
-Flamengo;31;9;17;0.5
-Atlético-MG;21;5;17;0.41666666
-Fluminense;28;8;17;0.41666666
-Grêmio;30;9;16;0.41666666
-Athletico-PR;27;8;17;0.41666666
-São Paulo;26;7;17;0.33333334
-Cruzeiro;23;6;17;0.33333334
-Internacional;23;6;17;0.33333334
-Fortaleza;23;6;17;0.25
-Red Bull Bragantino;28;7;17;0.25
-Santos;17;4;17;0.25
-Cuiabá;25;7;17;0.25
-Bahia;15;3;17;0.16666667
-Corinthians;19;5;16;0.16666667
-Goiás;16;4;17;0.16666667
-América-MG;10;2;16;0.16666667
-Vasco;9;2;16;0.083333336
-Coritiba;14;3;17;0
+Botafogo;43;14;17
+Palmeiras;31;8;17
+Flamengo;31;9;17
+Grêmio;30;9;16
+Fluminense;28;8;17
+Red Bull Bragantino;28;7;17
+Athletico-PR;27;8;17
+São Paulo;26;7;17
+Cuiabá;25;7;17
+Cruzeiro;23;6;17
+Internacional;23;6;17
+Fortaleza;23;6;17
+Atlético-MG;21;5;17
+Corinthians;19;5;16
+Santos;17;4;17
+Goiás;16;4;17
+Bahia;15;3;17
+Coritiba;14;3;17
+América-MG;10;2;16
+Vasco;9;2;16
