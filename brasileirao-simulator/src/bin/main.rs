@@ -5,15 +5,17 @@ use brasileirao_simulator::game_match::initialize_match_vec;
 use brasileirao_simulator::team::initialize_team_vec;
 use brasileirao_simulator::{game_match::Match, team::Team};
 
-use std::thread;
 use std::vec;
+use std::{env, thread};
 
-const MAX_SIM: u32 = 1_000_000;
+const MAX_SIM: u32 = 100_000_000;
 const MAX_THREADS: usize = 16;
 const MAX_TEAMS: usize = 20;
 const FIRST_MATCH_INDEX: u32 = 17;
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
+
     let match_vec = initialize_match_vec();
     let team_vec = initialize_team_vec();
     let team_vec_for_display = initialize_team_vec();
@@ -66,8 +68,15 @@ fn main() {
         MAX_THREADS,
     );
 
-    generate_teams_full_log(team_vec_for_display.clone(), final_percentages);
-    generate_teams_summary_log(team_vec_for_display, final_percentages);
+    let do_not_generate_logs = args[1].clone();
+
+    match do_not_generate_logs == *"true" {
+        true => todo!(),
+        false => {
+            generate_teams_full_log(team_vec_for_display.clone(), final_percentages);
+            generate_teams_summary_log(team_vec_for_display, final_percentages);
+        }
+    }
 }
 
 fn accumulate_all_threads_results(
@@ -144,9 +153,4 @@ fn simulate_championship(
         teams_positions_percentage,
         internacional_first_match_percentage,
     )
-}
-
-#[test]
-fn run_main_in_action() {
-    main();
 }

@@ -18,4 +18,9 @@ jobs:
     - name: Run build    
       run: cd brasileirao-simulator; cargo build --verbose
     - name: Run tests
-      run: cd brasileirao-simulator; cargo test -- --nocapture 
+      run: cd brasileirao-simulator; cargo test --verbose
+    - name: Run simulation without logs
+      run: cd brasileirao-simulator; cargo build --release; time ./target/release/main true 
+
+
+      
