@@ -45,7 +45,7 @@ pub fn display_summary_result(team_name: String, positions_percentage: [f64; 20]
     );
 }
 
-pub fn generate_teams_full_log(team_vec_for_display: Vec<Team>, final_positions: [[f64; 20]; 20]) {
+pub fn save_teams_full_log(team_vec_for_display: Vec<Team>, final_positions: [[f64; 20]; 20]) {
     let now: DateTime<Local> = Local::now();
     let now_str = format!("logs/full_table_{}", now);
     let output_file = File::create(&now_str).expect("Não foi possível criar o arquivo.");
@@ -59,10 +59,17 @@ pub fn generate_teams_full_log(team_vec_for_display: Vec<Team>, final_positions:
     }
 }
 
-pub fn generate_teams_summary_log(
-    team_vec_for_display: Vec<Team>,
-    final_positions: [[f64; 20]; 20],
-) {
+pub fn print_teams_full_log(team_vec_for_display: Vec<Team>, final_positions: [[f64; 20]; 20]) {
+    for team in team_vec_for_display.iter() {
+        println!("Time:{}", team.name);
+        for (i, percentage) in final_positions[team.original_index].iter().enumerate() {
+            println!("Posição {}: {}%", i + 1, percentage);
+        }
+        println!();
+    }
+}
+
+pub fn save_teams_summary_log(team_vec_for_display: Vec<Team>, final_positions: [[f64; 20]; 20]) {
     let now: DateTime<Local> = Local::now();
     let now_str = format!("logs/summary_table_{}", now);
     let output_file = File::create(&now_str).expect("Não foi possível criar o arquivo.");
@@ -72,6 +79,27 @@ pub fn generate_teams_summary_log(
             output_file.try_clone().unwrap(),
             team.name.to_string(),
             final_positions[team.original_index],
+        );
+    }
+}
+
+pub fn print_teams_summary_log(team_vec_for_display: Vec<Team>, final_positions: [[f64; 20]; 20]) {
+    for team in team_vec_for_display.iter() {
+        println!("{}", team.name);
+        println!(
+            "Chances de ser Campeão:     \t{:.2}%.",
+            final_positions[team.original_index][0]
+        );
+        println!(
+            "Chances de ser Vice Campeão:\t{:.2}%.",
+            final_positions[team.original_index][1]
+        );
+        println!(
+            "Chances de ser Rebaixado:   \t{:.2}%.",
+            final_positions[team.original_index][19]
+                + final_positions[team.original_index][18]
+                + final_positions[team.original_index][17]
+                + final_positions[team.original_index][16]
         );
     }
 }

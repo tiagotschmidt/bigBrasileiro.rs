@@ -85,14 +85,29 @@ impl Default for Team {
     }
 }
 
-pub fn initialize_team_vec() -> Vec<Team> {
+pub fn initialize_team_vec() -> Result<Vec<Team>, bool> {
     let mut team_vec: Vec<Team> = Vec::with_capacity(20);
     let content = fs::read_to_string("../times31-07.txt").expect("Deve existir esse arquivo.");
     for (i, part) in content.lines().enumerate() {
         let current_team = read_team_from_line(part, i);
         team_vec.push(current_team);
     }
-    team_vec
+
+    if team_vec.iter().all(assert_points) {
+        Ok(team_vec)
+    } else {
+        Err(false)
+    }
+}
+
+fn assert_points(team: &Team) -> bool {
+    let expected_points = team.points;
+
+    let current_ties = team.games - team.wins;
+
+    let current_points = team.wins * 3 + current_ties;
+
+    expected_points <= current_points
 }
 
 fn read_team_from_line(part: &str, i: usize) -> Team {
@@ -116,7 +131,11 @@ fn read_team_from_line(part: &str, i: usize) -> Team {
 
 // #[test]
 // fn test() {
-//     let mut team_vec = initialize_team_vec();
+//     let mut team_vec = match initialize_team_vec() {
+//         Ok(team_vec) => team_vec,
+//         Err(_) => panic!("Os times possuem pontos, vitórias e jogos incoerentes."),
+//     };
+
 //     let output_file =
 //         File::create("jogos31-07_new.txt").expect("Não foi possível criar o arquivo.");
 

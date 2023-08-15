@@ -1,5 +1,6 @@
 use brasileirao_simulator::display_results::{
-    display_header_result, generate_teams_full_log, generate_teams_summary_log,
+    display_header_result, print_teams_full_log, print_teams_summary_log, save_teams_full_log,
+    save_teams_summary_log,
 };
 use brasileirao_simulator::game_match::initialize_match_vec;
 use brasileirao_simulator::team::initialize_team_vec;
@@ -8,17 +9,24 @@ use brasileirao_simulator::{game_match::Match, team::Team};
 use std::vec;
 use std::{env, thread};
 
-const MAX_SIM: u32 = 100_000_000;
+const MAX_SIM: u32 = 10_000_000;
 const MAX_THREADS: usize = 16;
 const MAX_TEAMS: usize = 20;
-const FIRST_MATCH_INDEX: u32 = 17;
+const FIRST_MATCH_INDEX: u32 = 19;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
     let match_vec = initialize_match_vec();
-    let team_vec = initialize_team_vec();
-    let team_vec_for_display = initialize_team_vec();
+    let team_vec = match initialize_team_vec() {
+        Ok(team_vec) => team_vec,
+        Err(_) => panic!("Os times possuem pontos, vitórias e jogos incoerentes."),
+    };
+
+    let team_vec_for_display = match initialize_team_vec() {
+        Ok(team_vec) => team_vec,
+        Err(_) => panic!("Os times possuem pontos, vitórias e jogos incoerentes."),
+    };
 
     let all_internacional_first_match_stats = [[0; 3]; MAX_THREADS];
     let mut all_internacional_first_match_percentage = [[0.0; 3]; MAX_THREADS];
@@ -68,13 +76,18 @@ fn main() {
         MAX_THREADS,
     );
 
-    let do_not_generate_logs = args[1].clone();
+    let is_running_on_github = args.first();
 
-    match do_not_generate_logs == *"true" {
-        true => todo!(),
-        false => {
-            generate_teams_full_log(team_vec_for_display.clone(), final_percentages);
-            generate_teams_summary_log(team_vec_for_display, final_percentages);
+    if let Some(boolean_string) = is_running_on_github {
+        match boolean_string == &"true".to_string() {
+            true => {
+                print_teams_full_log(team_vec_for_display.clone(), final_percentages);
+                print_teams_summary_log(team_vec_for_display, final_percentages);
+            }
+            false => {
+                save_teams_full_log(team_vec_for_display.clone(), final_percentages);
+                save_teams_summary_log(team_vec_for_display, final_percentages);
+            }
         }
     }
 }
