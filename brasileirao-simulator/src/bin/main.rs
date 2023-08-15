@@ -9,7 +9,7 @@ use brasileirao_simulator::{game_match::Match, team::Team};
 use std::vec;
 use std::{env, thread};
 
-const MAX_SIM: u32 = 10_000_000;
+const MAX_SIM: u32 = 100;
 const MAX_THREADS: usize = 16;
 const MAX_TEAMS: usize = 20;
 
@@ -76,7 +76,7 @@ fn main() {
         MAX_THREADS,
     );
 
-    let is_running_on_github = args.first();
+    let is_running_on_github = args.get(1);
 
     if let Some(boolean_string) = is_running_on_github {
         match boolean_string == &"true".to_string() {
