@@ -1,33 +1,3 @@
-02/08;Fluminense;Palmeiras
-02/08;Vasco;Grêmio
-02/08;São Paulo;Atlético-MG
-02/08;Santos;Athletico-PR
-02/08;Goiás;Fortaleza
-02/08;Cruzeiro;Botafogo
-02/08;Internacional;Corinthians
-02/08;Coritiba;Red Bull Bragantino
-02/08;Bahia;América-MG
-02/08;Cuiabá;Flamengo
-06/08;Flamengo;São Paulo
-06/08;Botafogo;Internacional
-06/08;Palmeiras;Cruzeiro
-06/08;Corinthians;Coritiba
-06/08;Red Bull Bragantino;Vasco
-06/08;Atlético-MG;Bahia
-06/08;Grêmio;Fluminense
-06/08;Athletico-PR;Cuiabá
-06/08;Fortaleza;Santos
-06/08;América-MG;Goiás
-13/08;Fluminense;América-MG
-13/08;Vasco;Atlético-MG
-13/08;São Paulo;Botafogo
-13/08;Santos;Grêmio
-13/08;Goiás;Athletico-PR
-13/08;Cruzeiro;Corinthians
-13/08;Internacional;Fortaleza
-13/08;Coritiba;Flamengo
-13/08;Bahia;Red Bull Bragantino
-13/08;Cuiabá;Palmeiras
 20/08;Flamengo;Internacional
 20/08;Botafogo;Bahia
 20/08;Palmeiras;Vasco
