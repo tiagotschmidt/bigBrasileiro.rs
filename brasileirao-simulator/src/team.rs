@@ -85,16 +85,21 @@ impl Default for Team {
     }
 }
 
-pub fn initialize_team_vec() -> Result<Vec<Team>, bool> {
+pub fn initialize_team_vec() -> Result<(u32, Vec<Team>), bool> {
     let mut team_vec: Vec<Team> = Vec::with_capacity(20);
     let content = fs::read_to_string("../times31-07.txt").expect("Deve existir esse arquivo.");
+    let mut current_first_game = 0;
     for (i, part) in content.lines().enumerate() {
         let current_team = read_team_from_line(part, i);
+
+        if current_team.name == "Internacional" {
+            current_first_game = current_team.games;
+        }
         team_vec.push(current_team);
     }
 
     if team_vec.iter().all(assert_points) {
-        Ok(team_vec)
+        Ok((current_first_game, team_vec))
     } else {
         Err(false)
     }

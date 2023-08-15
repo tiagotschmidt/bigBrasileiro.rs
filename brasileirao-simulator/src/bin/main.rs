@@ -12,18 +12,17 @@ use std::{env, thread};
 const MAX_SIM: u32 = 10_000_000;
 const MAX_THREADS: usize = 16;
 const MAX_TEAMS: usize = 20;
-const FIRST_MATCH_INDEX: u32 = 19;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
     let match_vec = initialize_match_vec();
-    let team_vec = match initialize_team_vec() {
+    let (first_match_index, team_vec) = match initialize_team_vec() {
         Ok(team_vec) => team_vec,
         Err(_) => panic!("Os times possuem pontos, vitórias e jogos incoerentes."),
     };
 
-    let team_vec_for_display = match initialize_team_vec() {
+    let (_, team_vec_for_display) = match initialize_team_vec() {
         Ok(team_vec) => team_vec,
         Err(_) => panic!("Os times possuem pontos, vitórias e jogos incoerentes."),
     };
@@ -44,6 +43,7 @@ fn main() {
         thread_vec.push(thread::spawn(move || {
             {
                 simulate_championship(
+                    first_match_index,
                     team_vec,
                     match_vec,
                     all_teams_positions[i],
@@ -126,6 +126,7 @@ fn accumulate_all_threads_results(
 }
 
 fn simulate_championship(
+    first_match_index: u32,
     team_vec: Vec<Team>,
     match_vec: Vec<Match>,
     mut teams_positions: [[u32; MAX_TEAMS]; MAX_TEAMS],
@@ -138,7 +139,7 @@ fn simulate_championship(
 
         for game_match in match_vec.clone() {
             (team_vec, internacional_first_match_stats) = game_match.simulate_points_game(
-                FIRST_MATCH_INDEX,
+                first_match_index,
                 team_vec,
                 internacional_first_match_stats,
             );
