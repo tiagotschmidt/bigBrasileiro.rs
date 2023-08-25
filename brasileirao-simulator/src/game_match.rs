@@ -130,7 +130,7 @@ impl Match {
 
 pub fn initialize_match_vec() -> Vec<Match> {
     let mut match_vec: Vec<Match> = Vec::with_capacity(380);
-    let content = fs::read_to_string("../jogos31-07.txt").expect("Deve existir esse arquivo.");
+    let content = fs::read_to_string("../jogos25-08.txt").expect("Deve existir esse arquivo.");
     for part in content.lines() {
         let current_match = Match::new(part);
         match_vec.push(current_match);
