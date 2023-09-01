@@ -1,13 +1,3 @@
-20/08;Flamengo;Internacional
-20/08;Botafogo;Bahia
-20/08;Palmeiras;Vasco
-20/08;Corinthians;Goiás
-20/08;Red Bull Bragantino;Cuiabá
-20/08;Atlético-MG;Santos
-20/08;Grêmio;Cruzeiro
-20/08;Athletico-PR;Fluminense
-20/08;Fortaleza;Coritiba
-20/08;América-MG;São Paulo
 27/08;Fluminense;Fortaleza
 27/08;Botafogo;Flamengo
 27/08;São Paulo;Coritiba

@@ -1,0 +1,20 @@
+Botafogo;51;16;21
+Palmeiras;40;11;21
+Flamengo;36;10;21
+Grêmio;36;11;20
+Fluminense;35;10;21
+Red Bull Bragantino;35;9;21
+Athletico-PR;33;9;21
+Fortaleza;32;9;21
+Atlético-MG;30;8;21
+Cuiabá;28;8;21
+São Paulo;28;7;21
+Cruzeiro;25;6;21
+Internacional;25;6;21
+Corinthians;25;6;20
+Goiás;24;6;21
+Santos;21;5;21
+Bahia;21;5;21
+Vasco;16;4;20
+Coritiba;14;3;21
+América-MG;13;3;20
