@@ -9,7 +9,7 @@ use brasileirao_simulator::{game_match::Match, team::Team};
 use std::vec;
 use std::{env, thread};
 
-const MAX_SIM: u32 = 10_000_000;
+const MAX_SIM: u32 = 1_000_000_000;
 const MAX_THREADS: usize = 16;
 const MAX_TEAMS: usize = 20;
 
