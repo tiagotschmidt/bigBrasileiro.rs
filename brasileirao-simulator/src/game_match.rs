@@ -61,8 +61,6 @@ impl Match {
         mut internacional_first_match_stats: [u32; 3],
     ) -> (Vec<Team>, [u32; 3]) {
         let mut rng = rand::thread_rng();
-        let rng_one: f32 = rng.gen_range(0.0..1.0);
-        let rng_two: f32 = rng.gen_range(0.0..1.0);
 
         let (first_team_index, second_team_index) =
             Match::find_teams(self.first_team, self.second_team, teams_vec.clone());
@@ -83,6 +81,9 @@ impl Match {
         };
 
         let (first_team, second_team) = loop {
+            let rng_one: f32 = rng.gen_range(0.0..1.0);
+            let rng_two: f32 = rng.gen_range(0.0..1.0);
+
             if first_team.name == "Internacional" && first_team.games == first_match_index {
                 match (first_win_rate >= rng_one, second_win_rate >= rng_two) {
                     (true, false) => {
@@ -97,7 +98,7 @@ impl Match {
                         internacional_first_match_stats[1] += 1;
                         break (first_team.tie_points(), second_team.tie_points());
                     }
-                    (true, true) => (),
+                    (true, true) => {}
                 }
             } else if second_team.name == "Internacional" && second_team.games == first_match_index
             {
@@ -114,14 +115,14 @@ impl Match {
                         internacional_first_match_stats[1] += 1;
                         break (first_team.tie_points(), second_team.tie_points());
                     }
-                    (true, true) => (),
+                    (true, true) => {}
                 }
             } else {
                 match (first_win_rate >= rng_one, second_win_rate >= rng_two) {
                     (true, false) => break (first_team.win_points(), second_team.lose()),
                     (false, true) => break (first_team.lose(), second_team.win_points()),
                     (false, false) => break (first_team.tie_points(), second_team.tie_points()),
-                    (true, true) => (),
+                    (true, true) => {}
                 }
             }
         };
@@ -134,7 +135,7 @@ impl Match {
 
 pub fn initialize_match_vec() -> Vec<Match> {
     let mut match_vec: Vec<Match> = Vec::with_capacity(380);
-    let content = fs::read_to_string("../jogos01-09.txt").expect("Deve existir esse arquivo.");
+    let content = fs::read_to_string("../jogos01-10.txt").expect("Deve existir esse arquivo.");
     for part in content.lines() {
         let current_match = Match::new(part);
         match_vec.push(current_match);
