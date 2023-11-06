@@ -18,14 +18,11 @@ fn main() {
 
     let match_vec = initialize_match_vec();
     let (first_match_index, team_vec) = match initialize_team_vec() {
-        Ok(team_vec) => team_vec,
+        Ok(return_value) => return_value,
         Err(_) => panic!("Os times possuem pontos, vitórias e jogos incoerentes."),
     };
 
-    let (_, team_vec_for_display) = match initialize_team_vec() {
-        Ok(team_vec) => team_vec,
-        Err(_) => panic!("Os times possuem pontos, vitórias e jogos incoerentes."),
-    };
+    let team_vec_for_display = team_vec.clone();
 
     let all_internacional_first_match_stats = [[0; 3]; MAX_THREADS];
     let mut all_internacional_first_match_percentage = [[0.0; 3]; MAX_THREADS];
@@ -134,7 +131,7 @@ fn simulate_championship(
     mut internacional_first_match_stats: [u32; 3],
     mut internacional_first_match_percentage: [f64; 3],
 ) -> ([[f64; MAX_TEAMS]; MAX_TEAMS], [f64; 3]) {
-    for _i in 0..MAX_SIM / MAX_THREADS as u32 {
+    for _ in 0..MAX_SIM / MAX_THREADS as u32 {
         let mut team_vec = team_vec.clone();
 
         for game_match in match_vec.clone() {
