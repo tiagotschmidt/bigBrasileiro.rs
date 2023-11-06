@@ -88,7 +88,7 @@ impl Default for Team {
 
 pub fn initialize_team_vec() -> Result<(u32, Vec<Team>), bool> {
     let mut team_vec: Vec<Team> = Vec::with_capacity(20);
-    let content = fs::read_to_string("../times01-10.txt").expect("Deve existir esse arquivo.");
+    let content = fs::read_to_string("../times01-11.txt").expect("Deve existir esse arquivo.");
     let mut current_first_game = 0;
     for (i, part) in content.lines().enumerate() {
         let current_team = read_team_from_line(part, i);
