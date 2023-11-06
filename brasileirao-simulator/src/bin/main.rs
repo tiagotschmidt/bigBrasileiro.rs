@@ -30,6 +30,7 @@ fn main() {
 
     let all_teams_positions = [[[0; MAX_TEAMS]; MAX_TEAMS]; MAX_THREADS];
     let mut all_teams_positions_percentage = [[[0.0; MAX_TEAMS]; MAX_TEAMS]; MAX_THREADS];
+    let mut all_positions_total_points = [[0; MAX_TEAMS]; MAX_THREADS];
     let final_percentages = [[0.0; MAX_TEAMS]; MAX_TEAMS];
 
     let mut thread_vec = vec![];
@@ -47,6 +48,7 @@ fn main() {
                     all_teams_positions_percentage[i],
                     all_internacional_first_match_stats[i],
                     all_internacional_first_match_percentage[i],
+                    all_positions_total_points[i],
                 )
             }
         }));
@@ -56,15 +58,17 @@ fn main() {
         (
             all_teams_positions_percentage[i],
             all_internacional_first_match_percentage[i],
+            all_positions_total_points[i],
         ) = handle.join().unwrap();
     }
 
-    let (final_internacional_first_match_percentage, final_percentages) =
+    let (final_internacional_first_match_percentage, final_percentages, final_average_points) =
         accumulate_all_threads_results(
             final_percentages,
             all_teams_positions_percentage,
             &mut final_internacional_first_match_percentage,
             all_internacional_first_match_percentage,
+            all_positions_total_points,
         );
 
     display_header_result(
@@ -79,11 +83,19 @@ fn main() {
         match boolean_string == &"true".to_string() {
             true => {
                 print_teams_full_log(team_vec_for_display.clone(), final_percentages);
-                print_teams_summary_log(team_vec_for_display, final_percentages);
+                print_teams_summary_log(
+                    team_vec_for_display,
+                    final_percentages,
+                    final_average_points,
+                );
             }
             false => {
                 save_teams_full_log(team_vec_for_display.clone(), final_percentages);
-                save_teams_summary_log(team_vec_for_display, final_percentages);
+                save_teams_summary_log(
+                    team_vec_for_display,
+                    final_percentages,
+                    final_average_points,
+                );
             }
         }
     }
@@ -94,7 +106,14 @@ fn accumulate_all_threads_results(
     all_teams_positions_percentage: [[[f64; MAX_TEAMS]; MAX_TEAMS]; MAX_THREADS],
     final_internacional_first_match_percentage: &mut [f64; 3],
     all_internacional_first_match_percentage: [[f64; 3]; MAX_THREADS],
-) -> (&mut [f64; 3], [[f64; MAX_TEAMS]; MAX_TEAMS]) {
+    all_positions_total_points: [[u32; MAX_TEAMS]; MAX_THREADS],
+) -> (
+    &mut [f64; 3],
+    [[f64; MAX_TEAMS]; MAX_TEAMS],
+    [f64; MAX_TEAMS],
+) {
+    let mut all_positions_average_points = [0.0; MAX_TEAMS];
+
     (0..MAX_TEAMS).for_each(|i| {
         (0..MAX_THREADS).for_each(|j| {
             for k in 0..MAX_TEAMS {
@@ -116,12 +135,24 @@ fn accumulate_all_threads_results(
         *_item = acc;
     }
 
+    (0..MAX_TEAMS).for_each(|i| {
+        (0..MAX_THREADS).for_each(|j| {
+            all_positions_average_points[i] += all_positions_total_points[j][i] as f64;
+        });
+    });
+
+    (0..MAX_TEAMS).for_each(|i| {
+        all_positions_average_points[i] /= MAX_SIM as f64;
+    });
+
     (
         final_internacional_first_match_percentage,
         final_percentages,
+        all_positions_average_points,
     )
 }
 
+#[allow(clippy::too_many_arguments)]
 fn simulate_championship(
     first_match_index: u32,
     team_vec: Vec<Team>,
@@ -130,7 +161,8 @@ fn simulate_championship(
     mut teams_positions_percentage: [[f64; MAX_TEAMS]; MAX_TEAMS],
     mut internacional_first_match_stats: [u32; 3],
     mut internacional_first_match_percentage: [f64; 3],
-) -> ([[f64; MAX_TEAMS]; MAX_TEAMS], [f64; 3]) {
+    mut positions_total_points: [u32; MAX_TEAMS],
+) -> ([[f64; MAX_TEAMS]; MAX_TEAMS], [f64; 3], [u32; MAX_TEAMS]) {
     for _ in 0..MAX_SIM / MAX_THREADS as u32 {
         let mut team_vec = team_vec.clone();
 
@@ -145,6 +177,10 @@ fn simulate_championship(
 
         for (i, team) in team_vec.iter().enumerate() {
             teams_positions[team.original_index][i] += 1;
+        }
+
+        for (i, team) in team_vec.iter().enumerate() {
+            positions_total_points[i] += team.points;
         }
     }
 
@@ -163,5 +199,6 @@ fn simulate_championship(
     (
         teams_positions_percentage,
         internacional_first_match_percentage,
+        positions_total_points,
     )
 }

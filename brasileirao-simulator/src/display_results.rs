@@ -53,7 +53,7 @@ pub fn save_teams_full_log(team_vec_for_display: Vec<Team>, final_positions: [[f
     for team in team_vec_for_display.iter() {
         writeln!(&output_file, "Time:{}", team.name).unwrap();
         for (i, percentage) in final_positions[team.original_index].iter().enumerate() {
-            writeln!(&output_file, "Posição {}: {}%", i + 1, percentage).unwrap();
+            writeln!(&output_file, "Posição {}: {}", i + 1, percentage).unwrap();
         }
         writeln!(&output_file).unwrap();
     }
@@ -69,7 +69,11 @@ pub fn print_teams_full_log(team_vec_for_display: Vec<Team>, final_positions: [[
     }
 }
 
-pub fn save_teams_summary_log(team_vec_for_display: Vec<Team>, final_positions: [[f64; 20]; 20]) {
+pub fn save_teams_summary_log(
+    team_vec_for_display: Vec<Team>,
+    final_positions: [[f64; 20]; 20],
+    positions_average_points: [f64; 20],
+) {
     let now: DateTime<Local> = Local::now();
     let now_str = format!("logs/summary_table_{}", now);
     let output_file = File::create(&now_str).expect("Não foi possível criar o arquivo.");
@@ -81,9 +85,24 @@ pub fn save_teams_summary_log(team_vec_for_display: Vec<Team>, final_positions: 
             final_positions[team.original_index],
         );
     }
+
+    writeln!(&output_file, " \n").unwrap();
+    for (i, percentage) in positions_average_points.iter().enumerate() {
+        writeln!(
+            &output_file,
+            "Pontuação média da posição {}: {}.",
+            i + 1,
+            percentage
+        )
+        .unwrap();
+    }
 }
 
-pub fn print_teams_summary_log(team_vec_for_display: Vec<Team>, final_positions: [[f64; 20]; 20]) {
+pub fn print_teams_summary_log(
+    team_vec_for_display: Vec<Team>,
+    final_positions: [[f64; 20]; 20],
+    positions_average_points: [f64; 20],
+) {
     for team in team_vec_for_display.iter() {
         println!("{}", team.name);
         println!(
@@ -101,6 +120,10 @@ pub fn print_teams_summary_log(team_vec_for_display: Vec<Team>, final_positions:
                 + final_positions[team.original_index][17]
                 + final_positions[team.original_index][16]
         );
+    }
+    println!(" \n");
+    for (i, percentage) in positions_average_points.iter().enumerate() {
+        println!("Pontuação média da posição {}: {};", i + 1, percentage);
     }
 }
 
