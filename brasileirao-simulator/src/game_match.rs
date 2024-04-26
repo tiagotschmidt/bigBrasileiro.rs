@@ -34,20 +34,20 @@ impl Match {
     }
 
     pub fn find_teams(
-        first_name: String,
-        second_name: String,
-        teams_vec: Vec<Team>,
+        first_name: &String,
+        second_name: &String,
+        teams_vec: &[Team],
     ) -> (usize, usize) {
         let first = teams_vec
             .iter()
             .enumerate()
-            .find(|(_index, item)| item.name == first_name)
+            .find(|(_index, item)| item.name == *first_name)
             .map(|(index, _item)| index)
             .unwrap_or_else(|| panic!("Unable to find: {}.\n", first_name));
         let second = teams_vec
             .iter()
             .enumerate()
-            .find(|(_index, item)| item.name == second_name)
+            .find(|(_index, item)| item.name == *second_name)
             .map(|(index, _item)| index)
             .unwrap_or_else(|| panic!("Unable to find: {}.\n", second_name));
 
@@ -55,7 +55,7 @@ impl Match {
     }
 
     pub fn simulate_points_game(
-        self,
+        &self,
         first_match_index: u32,
         mut teams_vec: Vec<Team>,
         mut internacional_first_match_stats: [u32; 3],
@@ -63,7 +63,7 @@ impl Match {
         let mut rng = rand::thread_rng();
 
         let (first_team_index, second_team_index) =
-            Match::find_teams(self.first_team, self.second_team, teams_vec.clone());
+            Match::find_teams(&self.first_team, &self.second_team, &teams_vec);
 
         let first_team = teams_vec[first_team_index].clone();
         let second_team = teams_vec[second_team_index].clone();

@@ -166,7 +166,7 @@ fn simulate_championship(
     for _ in 0..MAX_SIM / MAX_THREADS as u32 {
         let mut team_vec = team_vec.clone();
 
-        for game_match in match_vec.clone() {
+        for game_match in match_vec.iter() {
             (team_vec, internacional_first_match_stats) = game_match.simulate_points_game(
                 first_match_index,
                 team_vec,
