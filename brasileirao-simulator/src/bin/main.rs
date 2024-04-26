@@ -10,7 +10,7 @@ use std::vec;
 use std::{env, thread};
 
 const MAX_SIM: u32 = 10_000_000;
-const MAX_THREADS: usize = 16;
+const MAX_THREADS: usize = 32;
 const MAX_TEAMS: usize = 20;
 
 fn main() {

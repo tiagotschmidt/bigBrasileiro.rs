@@ -1,60 +1,350 @@
-05/11;Flamengo;Palmeiras
-05/11;Botafogo;Grêmio
-05/11;São Paulo;Red Bull Bragantino
-05/11;Corinthians;Atlético-MG
-05/11;Goiás;Santos
-05/11;Cruzeiro;Vasco
-05/11;Internacional;Fluminense
-05/11;Athletico-PR;Fortaleza
-05/11;Bahia;Cuiabá
-05/11;América-MG;Coritiba
-12/11;Flamengo;Fluminense
-12/11;Vasco;América-MG
-12/11;Palmeiras;Internacional
-12/11;Santos;São Paulo
-12/11;Red Bull Bragantino;Botafogo
-12/11;Atlético-MG;Goiás
-12/11;Grêmio;Corinthians
-12/11;Coritiba;Cruzeiro
-12/11;Bahia;Athletico-PR
-12/11;Cuiabá;Fortaleza
-22/11;Fluminense;Coritiba
-22/11;Botafogo;Santos
-22/11;São Paulo;Cuiabá
-22/11;Corinthians;Bahia
-22/11;Goiás;Cruzeiro
-22/11;Atlético-MG;Grêmio
-22/11;Internacional;Red Bull Bragantino
-22/11;Athletico-PR;Vasco
-22/11;Fortaleza;Palmeiras
-22/11;América-MG;Flamengo
-26/11;Flamengo;Atlético-MG
-26/11;Vasco;Corinthians
-26/11;Palmeiras;América-MG
-26/11;Santos;Fluminense
-26/11;Red Bull Bragantino;Fortaleza
-26/11;Cruzeiro;Athletico-PR
-26/11;Grêmio;Goiás
-26/11;Coritiba;Botafogo
-26/11;Bahia;São Paulo
-26/11;Cuiabá;Internacional
-29/11;Flamengo;Cuiabá
-29/11;Botafogo;Cruzeiro
-29/11;Palmeiras;Fluminense
-29/11;Corinthians;Internacional
-29/11;Red Bull Bragantino;Coritiba
-29/11;Atlético-MG;São Paulo
-29/11;Grêmio;Vasco
-29/11;Athletico-PR;Santos
-29/11;Fortaleza;Goiás
-29/11;América-MG;Bahia
-03/12;Fluminense;Grêmio
-03/12;Vasco;Red Bull Bragantino
-03/12;São Paulo;Flamengo
-03/12;Santos;Fortaleza
-03/12;Goiás;América-MG
-03/12;Cruzeiro;Palmeiras
-03/12;Internacional;Botafogo
-03/12;Coritiba;Corinthians
-03/12;Bahia;Atlético-MG
-03/12;Cuiabá;Athletico-PR
+01/01;Internacional;Atlético-GO
+01/01;Cruzeiro;Vitória
+01/01;Bahia;Grêmio
+01/01;Flamengo;Botafogo
+01/01;Vasco;Criciúma
+01/01;Corinthians;Fluminense
+01/01;São Paulo;Palmeiras
+01/01;Fortaleza;Red Bull Bragantino
+01/01;Cuiabá;Atlético-MG
+01/01;Juventude;Athletico-PR
+01/01;Grêmio;Criciúma
+01/01;Cruzeiro;Internacional
+01/01;Vitória;São Paulo
+01/01;Fluminense;Atlético-MG
+01/01;Botafogo;Bahia
+01/01;Corinthians;Fortaleza
+01/01;Red Bull Bragantino;Flamengo
+01/01;Athletico-PR;Vasco
+01/01;Cuiabá;Palmeiras
+01/01;Juventude;Atlético-GO
+01/01;Internacional;Juventude
+01/01;Atlético-MG;Grêmio
+01/01;Bahia;Red Bull Bragantino
+01/01;Flamengo;Corinthians
+01/01;Vasco;Vitória
+01/01;Palmeiras;Athletico-PR
+01/01;São Paulo;Fluminense
+01/01;Fortaleza;Botafogo
+01/01;Atlético-GO;Cruzeiro
+01/01;Criciúma;Cuiabá
+01/01;Grêmio;Red Bull Bragantino
+01/01;Atlético-MG;Bahia
+01/01;Vitória;Atlético-GO
+01/01;Fluminense;Juventude
+01/01;Vasco;Flamengo
+01/01;Corinthians;Botafogo
+01/01;São Paulo;Cruzeiro
+01/01;Fortaleza;Athletico-PR
+01/01;Cuiabá;Internacional
+01/01;Criciúma;Palmeiras
+01/01;Internacional;São Paulo
+01/01;Cruzeiro;Cuiabá
+01/01;Bahia;Fortaleza
+01/01;Flamengo;Grêmio
+01/01;Botafogo;Fluminense
+01/01;Palmeiras;Vasco
+01/01;Red Bull Bragantino;Atlético-MG
+01/01;Athletico-PR;Criciúma
+01/01;Atlético-GO;Corinthians
+01/01;Juventude;Vitória
+01/01;Grêmio;Botafogo
+01/01;Atlético-MG;Palmeiras
+01/01;Vitória;Internacional
+01/01;Fluminense;Atlético-GO
+01/01;Vasco;Cruzeiro
+01/01;Corinthians;São Paulo
+01/01;Red Bull Bragantino;Juventude
+01/01;Athletico-PR;Flamengo
+01/01;Cuiabá;Fortaleza
+01/01;Criciúma;Bahia
+01/01;Internacional;Corinthians
+01/01;Cruzeiro;Fluminense
+01/01;Vitória;Atlético-MG
+01/01;Flamengo;Bahia
+01/01;Botafogo;Athletico-PR
+01/01;Palmeiras;Red Bull Bragantino
+01/01;São Paulo;Cuiabá
+01/01;Fortaleza;Grêmio
+01/01;Atlético-GO;Criciúma
+01/01;Juventude;Vasco
+01/01;Grêmio;Internacional
+01/01;Atlético-MG;Fortaleza
+01/01;Bahia;Cruzeiro
+01/01;Fluminense;Flamengo
+01/01;Vasco;São Paulo
+01/01;Palmeiras;Juventude
+01/01;Red Bull Bragantino;Vitória
+01/01;Athletico-PR;Corinthians
+01/01;Cuiabá;Atlético-GO
+01/01;Criciúma;Botafogo
+01/01;Internacional;Atlético-MG
+01/01;Cruzeiro;Athletico-PR
+01/01;Bahia;Vasco
+01/01;Fluminense;Vitória
+01/01;Botafogo;Red Bull Bragantino
+01/01;Corinthians;Cuiabá
+01/01;São Paulo;Criciúma
+01/01;Fortaleza;Palmeiras
+01/01;Atlético-GO;Grêmio
+01/01;Juventude;Grêmio
+01/01;Grêmio;Fluminense
+01/01;Atlético-MG;Atlético-GO
+01/01;Vitória;Athletico-PR
+01/01;Flamengo;Cruzeiro
+01/01;Vasco;Botafogo
+01/01;Palmeiras;Corinthians
+01/01;São Paulo;Bahia
+01/01;Fortaleza;Juventude
+01/01;Cuiabá;Red Bull Bragantino
+01/01;Criciúma;Internacional
+01/01;Grêmio;Palmeiras
+01/01;Atlético-MG;Flamengo
+01/01;Bahia;Juventude
+01/01;Fluminense;Internacional
+01/01;Vasco;Fortaleza
+01/01;Corinthians;Vitória
+01/01;Red Bull Bragantino;Atlético-GO
+01/01;Athletico-PR;São Paulo
+01/01;Cuiabá;Botafogo
+01/01;Criciúma;Cruzeiro
+01/01;Internacional;Vasco
+01/01;Cruzeiro;Corinthians
+01/01;Vitória;Criciúma
+01/01;Flamengo;Cuiabá
+01/01;Botafogo;Atlético-MG
+01/01;Palmeiras;Bahia
+01/01;São Paulo;Red Bull Bragantino
+01/01;Fortaleza;Fluminense
+01/01;Atlético-GO;Athletico-PR
+01/01;Juventude;Grêmio
+01/01;Grêmio;Cruzeiro
+01/01;Atlético-MG;São Paulo
+01/01;Vitória;Botafogo
+01/01;Flamengo;Fortaleza
+01/01;Vasco;Corinthians
+01/01;Palmeiras;Atlético-GO
+01/01;Red Bull Bragantino;Internacional
+01/01;Athletico-PR;Bahia
+01/01;Cuiabá;Juventude
+01/01;Criciúma;Fluminense
+01/01;Internacional;Flamengo
+01/01;Cruzeiro;Red Bull Bragantino
+01/01;Bahia;Cuiabá
+01/01;Fluminense;Athletico-PR
+01/01;Botafogo;Palmeiras
+01/01;Corinthians;Criciúma
+01/01;São Paulo;Grêmio
+01/01;Fortaleza;Vitória
+01/01;Atlético-GO;Vasco
+01/01;Juventude;Atlético-MG
+01/01;Grêmio;Vitória
+01/01;Atlético-MG;Vasco
+01/01;Bahia;Corinthians
+01/01;Flamengo;Criciúma
+01/01;Botafogo;Internacional
+01/01;Palmeiras;Cruzeiro
+01/01;Red Bull Bragantino;Athletico-PR
+01/01;Fortaleza;Atlético-GO
+01/01;Cuiabá;Fluminense
+01/01;Juventude;São Paulo
+01/01;Internacional;Fortaleza
+01/01;Cruzeiro;Juventude
+01/01;Vitória;Flamengo
+01/01;Fluminense;Palmeiras
+01/01;Vasco;Cuiabá
+01/01;Corinthians;Grêmio
+01/01;São Paulo;Botafogo
+01/01;Athletico-PR;Atlético-MG
+01/01;Atlético-GO;Bahia
+01/01;Criciúma;Red Bull Bragantino
+01/01;Grêmio;Vasco
+01/01;Atlético-MG;Corinthians
+01/01;Bahia;Internacional
+01/01;Flamengo;Atlético-GO
+01/01;Botafogo;Cruzeiro
+01/01;Palmeiras;Vitória
+01/01;Red Bull Bragantino;Fluminense
+01/01;Fortaleza;São Paulo
+01/01;Cuiabá;Athletico-PR
+01/01;Juventude;Criciúma
+01/01;Internacional;Palmeiras
+01/01;Cruzeiro;Fortaleza
+01/01;Vitória;Cuiabá
+01/01;Fluminense;Bahia
+01/01;Vasco;Red Bull Bragantino
+01/01;Corinthians;Juventude
+01/01;São Paulo;Flamengo
+01/01;Athletico-PR;Grêmio
+01/01;Atlético-GO;Botafogo
+01/01;Criciúma;Atlético-MG
+01/01;Internacional;Athletico-PR
+01/01;Cruzeiro;Atlético-MG
+01/01;Bahia;Vitória
+01/01;Flamengo;Palmeiras
+01/01;Vasco;Fluminense
+01/01;Corinthians;Red Bull Bragantino
+01/01;São Paulo;Atlético-GO
+01/01;Fortaleza;Criciúma
+01/01;Cuiabá;Grêmio
+01/01;Juventude;Botafogo
+01/01;Grêmio;Bahia
+01/01;Atlético-MG;Cuiabá
+01/01;Vitória;Cruzeiro
+01/01;Fluminense;Corinthians
+01/01;Botafogo;Flamengo
+01/01;Palmeiras;São Paulo
+01/01;Red Bull Bragantino;Fortaleza
+01/01;Athletico-PR;Juventude
+01/01;Atlético-GO;Internacional
+01/01;Criciúma;Vasco
+01/01;Internacional;Cruzeiro
+01/01;Atlético-MG;Fluminense
+01/01;Bahia;Botafogo
+01/01;Flamengo;Red Bull Bragantino
+01/01;Vasco;Athletico-PR
+01/01;Palmeiras;Cuiabá
+01/01;São Paulo;Vitória
+01/01;Fortaleza;Corinthians
+01/01;Atlético-GO;Juventude
+01/01;Criciúma;Grêmio
+01/01;Grêmio;Atlético-MG
+01/01;Cruzeiro;Atlético-GO
+01/01;Vitória;Vasco
+01/01;Fluminense;São Paulo
+01/01;Botafogo;Fortaleza
+01/01;Corinthians;Flamengo
+01/01;Red Bull Bragantino;Bahia
+01/01;Athletico-PR;Palmeiras
+01/01;Cuiabá;Criciúma
+01/01;Juventude;Internacional
+01/01;Internacional;Cuiabá
+01/01;Cruzeiro;São Paulo
+01/01;Bahia;Atlético-MG
+01/01;Flamengo;Vasco
+01/01;Botafogo;Corinthians
+01/01;Palmeiras;Criciúma
+01/01;Red Bull Bragantino;Grêmio
+01/01;Athletico-PR;Fortaleza
+01/01;Atlético-GO;Vitória
+01/01;Juventude;Fluminense
+01/01;Grêmio;Flamengo
+01/01;Atlético-MG;Red Bull Bragantino
+01/01;Vitória;Juventude
+01/01;Fluminense;Botafogo
+01/01;Vasco;Palmeiras
+01/01;Corinthians;Atlético-GO
+01/01;São Paulo;Internacional
+01/01;Fortaleza;Bahia
+01/01;Cuiabá;Cruzeiro
+01/01;Criciúma;Athletico-PR
+01/01;Internacional;Vitória
+01/01;Cruzeiro;Vasco
+01/01;Bahia;Criciúma
+01/01;Flamengo;Athletico-PR
+01/01;Botafogo;Grêmio
+01/01;Palmeiras;Atlético-MG
+01/01;São Paulo;Corinthians
+01/01;Fortaleza;Cuiabá
+01/01;Atlético-GO;Fluminense
+01/01;Juventude;Red Bull Bragantino
+01/01;Grêmio;Fortaleza
+01/01;Atlético-MG;Vitória
+01/01;Bahia;Flamengo
+01/01;Fluminense;Cruzeiro
+01/01;Vasco;Juventude
+01/01;Corinthians;Internacional
+01/01;Red Bull Bragantino;Palmeiras
+01/01;Athletico-PR;Botafogo
+01/01;Cuiabá;São Paulo
+01/01;Criciúma;Atlético-GO
+01/01;Internacional;Grêmio
+01/01;Cruzeiro;Bahia
+01/01;Vitória;Red Bull Bragantino
+01/01;Flamengo;Fluminense
+01/01;Botafogo;Criciúma
+01/01;Corinthians;Athletico-PR
+01/01;São Paulo;Vasco
+01/01;Fortaleza;Atlético-MG
+01/01;Atlético-GO;Cuiabá
+01/01;Juventude;Palmeiras
+01/01;Grêmio;Atlético-GO
+01/01;Atlético-MG;Internacional
+01/01;Vitória;Fluminense
+01/01;Flamengo;Juventude
+01/01;Vasco;Bahia
+01/01;Palmeiras;Fortaleza
+01/01;Red Bull Bragantino;Botafogo
+01/01;Athletico-PR;Cruzeiro
+01/01;Cuiabá;Corinthians
+01/01;Criciúma;São Paulo
+01/01;Internacional;Criciúma
+01/01;Cruzeiro;Flamengo
+01/01;Bahia;São Paulo
+01/01;Fluminense;Grêmio
+01/01;Botafogo;Vasco
+01/01;Corinthians;Palmeiras
+01/01;Red Bull Bragantino;Cuiabá
+01/01;Athletico-PR;Vitória
+01/01;Atlético-GO;Atlético-MG
+01/01;Juventude;Fortaleza
+01/01;Internacional;Fluminense
+01/01;Cruzeiro;Criciúma
+01/01;Vitória;Corinthians
+01/01;Flamengo;Atlético-MG
+01/01;Botafogo;Cuiabá
+01/01;Palmeiras;Grêmio
+01/01;São Paulo;Athletico-PR
+01/01;Fortaleza;Vasco
+01/01;Atlético-GO;Red Bull Bragantino
+01/01;Juventude;Bahia
+01/01;Grêmio;Juventude
+01/01;Atlético-MG;Botafogo
+01/01;Bahia;Palmeiras
+01/01;Fluminense;Fortaleza
+01/01;Vasco;Internacional
+01/01;Corinthians;Cruzeiro
+01/01;Red Bull Bragantino;São Paulo
+01/01;Athletico-PR;Atlético-GO
+01/01;Cuiabá;Flamengo
+01/01;Criciúma;Vitória
+01/01;Internacional;Red Bull Bragantino
+01/01;Cruzeiro;Grêmio
+01/01;Bahia;Athletico-PR
+01/01;Fluminense;Criciúma
+01/01;Botafogo;Vitória
+01/01;Corinthians;Vasco
+01/01;São Paulo;Atlético-MG
+01/01;Fortaleza;Flamengo
+01/01;Atlético-GO;Palmeiras
+01/01;Juventude;Cuiabá
+01/01;Grêmio;São Paulo
+01/01;Atlético-MG;Juventude
+01/01;Vitória;Fortaleza
+01/01;Flamengo;Internacional
+01/01;Vasco;Atlético-GO
+01/01;Palmeiras;Botafogo
+01/01;Red Bull Bragantino;Cruzeiro
+01/01;Athletico-PR;Fluminense
+01/01;Cuiabá;Bahia
+01/01;Criciúma;Corinthians
+01/01;Internacional;Botafogo
+01/01;Cruzeiro;Palmeiras
+01/01;Vitória;Grêmio
+01/01;Fluminense;Cuiabá
+01/01;Vasco;Atlético-MG
+01/01;Corinthians;Bahia
+01/01;São Paulo;Juventude
+01/01;Athletico-PR;Red Bull Bragantino
+01/01;Atlético-GO;Fortaleza
+01/01;Criciúma;Flamengo
+01/01;Grêmio;Corinthians
+01/01;Atlético-MG;Athletico-PR
+01/01;Bahia;Atlético-GO
+01/01;Flamengo;Vitória
+01/01;Botafogo;São Paulo
+01/01;Palmeiras;Fluminense
+01/01;Red Bull Bragantino;Criciúma
+01/01;Fortaleza;Internacional
+01/01;Cuiabá;Vasco
+01/01;Juventude;Cruzeiro

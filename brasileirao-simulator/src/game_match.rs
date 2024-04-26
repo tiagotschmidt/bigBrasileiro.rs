@@ -43,13 +43,13 @@ impl Match {
             .enumerate()
             .find(|(_index, item)| item.name == first_name)
             .map(|(index, _item)| index)
-            .unwrap();
+            .unwrap_or_else(|| panic!("Unable to find: {}.\n", first_name));
         let second = teams_vec
             .iter()
             .enumerate()
             .find(|(_index, item)| item.name == second_name)
             .map(|(index, _item)| index)
-            .unwrap();
+            .unwrap_or_else(|| panic!("Unable to find: {}.\n", second_name));
 
         (first, second)
     }

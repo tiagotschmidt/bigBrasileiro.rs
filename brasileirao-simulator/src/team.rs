@@ -1,8 +1,6 @@
-//use std::io::Write;
-use std::{
-    fmt::Display,
-    fs::{self},
-};
+use std::fmt::Display;
+use std::fs;
+use std::io::Write;
 
 #[derive(Clone, Debug)]
 pub struct Team {
@@ -143,7 +141,7 @@ fn read_team_from_line(part: &str, i: usize) -> Team {
 //    };
 //
 //    let output_file =
-//        File::create("jogos31-07_new.txt").expect("Não foi possível criar o arquivo.");
+//        File::create("times-07_new.txt").expect("Não foi possível criar o arquivo.");
 //
 //    team_vec.sort_by(|a, b| b.points.cmp(&a.points));
 //
