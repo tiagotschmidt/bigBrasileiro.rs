@@ -6,17 +6,18 @@ use brasileirao_simulator::game_match::initialize_match_vec;
 use brasileirao_simulator::team::initialize_team_vec;
 use brasileirao_simulator::{game_match::Match, team::Team};
 
+use std::sync::Arc;
 use std::vec;
 use std::{env, thread};
 
-const MAX_SIM: u32 = 10_000_000;
+const MAX_SIM: u32 = 1_000_000_000;
 const MAX_THREADS: usize = 32;
 const MAX_TEAMS: usize = 20;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let match_vec = initialize_match_vec();
+    let match_vec = Arc::new(initialize_match_vec());
     let (first_match_index, team_vec) = match initialize_team_vec() {
         Ok(return_value) => return_value,
         Err(_) => panic!("Os times possuem pontos, vitórias e jogos incoerentes."),
@@ -37,7 +38,7 @@ fn main() {
 
     for i in 0..MAX_THREADS {
         let team_vec = team_vec.clone();
-        let match_vec = match_vec.clone();
+        let match_vec = Arc::clone(&match_vec);
         thread_vec.push(thread::spawn(move || {
             {
                 simulate_championship(
@@ -98,6 +99,8 @@ fn main() {
                 );
             }
         }
+    } else {
+        println!("Running commando incorrectly! Example: ./brasileirao-simulator false (is_running_on_github)")
     }
 }
 
@@ -156,14 +159,14 @@ fn accumulate_all_threads_results(
 fn simulate_championship(
     first_match_index: u32,
     team_vec: Vec<Team>,
-    match_vec: Vec<Match>,
+    match_vec: Arc<Vec<Match>>,
     mut teams_positions: [[u32; MAX_TEAMS]; MAX_TEAMS],
     mut teams_positions_percentage: [[f64; MAX_TEAMS]; MAX_TEAMS],
     mut internacional_first_match_stats: [u32; 3],
     mut internacional_first_match_percentage: [f64; 3],
     mut positions_total_points: [u32; MAX_TEAMS],
 ) -> ([[f64; MAX_TEAMS]; MAX_TEAMS], [f64; 3], [u32; MAX_TEAMS]) {
-    for _ in 0..MAX_SIM / MAX_THREADS as u32 {
+    (0..MAX_SIM / MAX_THREADS as u32).for_each(|current_iteration| {
         let mut team_vec = team_vec.clone();
 
         for game_match in match_vec.iter() {
@@ -182,7 +185,15 @@ fn simulate_championship(
         for (i, team) in team_vec.iter().enumerate() {
             positions_total_points[i] += team.points;
         }
-    }
+
+        if current_iteration % 10000 == 0 {
+            println!(
+                "Current iteration {} on thread {:?}.",
+                current_iteration,
+                thread::current().id()
+            );
+        }
+    });
 
     (0..MAX_TEAMS).for_each(|i| {
         for j in 0..MAX_TEAMS {
