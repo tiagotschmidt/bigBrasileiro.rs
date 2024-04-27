@@ -12,7 +12,7 @@ use std::{env, thread};
 
 const MAX_SIM: u32 = 1_000_000_000;
 const MAX_THREADS: usize = 32;
-const MAX_TEAMS: usize = 20;
+const NUMBER_OF_TEAMS: usize = 20;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -27,12 +27,12 @@ fn main() {
 
     let all_internacional_first_match_stats = [[0; 3]; MAX_THREADS];
     let mut all_internacional_first_match_percentage = [[0.0; 3]; MAX_THREADS];
-    let mut final_internacional_first_match_percentage = [0.0; 3];
 
-    let all_teams_positions = [[[0; MAX_TEAMS]; MAX_TEAMS]; MAX_THREADS];
-    let mut all_teams_positions_percentage = [[[0.0; MAX_TEAMS]; MAX_TEAMS]; MAX_THREADS];
-    let mut all_positions_total_points = [[0; MAX_TEAMS]; MAX_THREADS];
-    let final_percentages = [[0.0; MAX_TEAMS]; MAX_TEAMS];
+    let all_teams_positions = [[[0; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS]; MAX_THREADS];
+    let mut all_teams_positions_percentage =
+        [[[0.0; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS]; MAX_THREADS];
+    let mut all_positions_total_points = [[0; NUMBER_OF_TEAMS]; MAX_THREADS];
+    let final_percentages = [[0.0; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS];
 
     let mut thread_vec = vec![];
 
@@ -67,13 +67,12 @@ fn main() {
         accumulate_all_threads_results(
             final_percentages,
             all_teams_positions_percentage,
-            &mut final_internacional_first_match_percentage,
             all_internacional_first_match_percentage,
             all_positions_total_points,
         );
 
     display_header_result(
-        *final_internacional_first_match_percentage,
+        final_internacional_first_match_percentage,
         MAX_SIM,
         MAX_THREADS,
     );
@@ -100,30 +99,31 @@ fn main() {
             }
         }
     } else {
-        println!("Running commando incorrectly! Example: ./brasileirao-simulator false (is_running_on_github)")
+        panic!("Execução de comando shell incorreto! Exemplo: ./brasileirao-simulator false (is_running_on_github)")
     }
 }
 
 fn accumulate_all_threads_results(
-    mut final_percentages: [[f64; MAX_TEAMS]; MAX_TEAMS],
-    all_teams_positions_percentage: [[[f64; MAX_TEAMS]; MAX_TEAMS]; MAX_THREADS],
-    final_internacional_first_match_percentage: &mut [f64; 3],
+    mut final_percentages: [[f64; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS],
+    all_teams_positions_percentage: [[[f64; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS]; MAX_THREADS],
     all_internacional_first_match_percentage: [[f64; 3]; MAX_THREADS],
-    all_positions_total_points: [[u32; MAX_TEAMS]; MAX_THREADS],
+    all_positions_total_points: [[u32; NUMBER_OF_TEAMS]; MAX_THREADS],
 ) -> (
-    &mut [f64; 3],
-    [[f64; MAX_TEAMS]; MAX_TEAMS],
-    [f64; MAX_TEAMS],
+    [f64; 3],
+    [[f64; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS],
+    [f64; NUMBER_OF_TEAMS],
 ) {
-    let mut all_positions_average_points = [0.0; MAX_TEAMS];
+    let mut all_positions_average_points = [0.0; NUMBER_OF_TEAMS];
 
-    (0..MAX_TEAMS).for_each(|i| {
+    (0..NUMBER_OF_TEAMS).for_each(|i| {
         (0..MAX_THREADS).for_each(|j| {
-            for k in 0..MAX_TEAMS {
+            for k in 0..NUMBER_OF_TEAMS {
                 final_percentages[i][k] += all_teams_positions_percentage[j][i][k];
             }
         });
     });
+
+    let mut final_internacional_first_match_percentage = [0.0; 3];
 
     for (i, _item) in final_internacional_first_match_percentage
         .iter_mut()
@@ -138,13 +138,13 @@ fn accumulate_all_threads_results(
         *_item = acc;
     }
 
-    (0..MAX_TEAMS).for_each(|i| {
+    (0..NUMBER_OF_TEAMS).for_each(|i| {
         (0..MAX_THREADS).for_each(|j| {
             all_positions_average_points[i] += all_positions_total_points[j][i] as f64;
         });
     });
 
-    (0..MAX_TEAMS).for_each(|i| {
+    (0..NUMBER_OF_TEAMS).for_each(|i| {
         all_positions_average_points[i] /= MAX_SIM as f64;
     });
 
@@ -160,12 +160,16 @@ fn simulate_championship(
     first_match_index: u32,
     team_vec: Vec<Team>,
     match_vec: Arc<Vec<Match>>,
-    mut teams_positions: [[u32; MAX_TEAMS]; MAX_TEAMS],
-    mut teams_positions_percentage: [[f64; MAX_TEAMS]; MAX_TEAMS],
+    mut teams_positions: [[u32; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS],
+    mut teams_positions_percentage: [[f64; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS],
     mut internacional_first_match_stats: [u32; 3],
     mut internacional_first_match_percentage: [f64; 3],
-    mut positions_total_points: [u32; MAX_TEAMS],
-) -> ([[f64; MAX_TEAMS]; MAX_TEAMS], [f64; 3], [u32; MAX_TEAMS]) {
+    mut positions_total_points: [u32; NUMBER_OF_TEAMS],
+) -> (
+    [[f64; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS],
+    [f64; 3],
+    [u32; NUMBER_OF_TEAMS],
+) {
     (0..MAX_SIM / MAX_THREADS as u32).for_each(|current_iteration| {
         let mut team_vec = team_vec.clone();
 
@@ -195,8 +199,8 @@ fn simulate_championship(
         }
     });
 
-    (0..MAX_TEAMS).for_each(|i| {
-        for j in 0..MAX_TEAMS {
+    (0..NUMBER_OF_TEAMS).for_each(|i| {
+        for j in 0..NUMBER_OF_TEAMS {
             teams_positions_percentage[i][j] =
                 teams_positions[i][j] as f64 * 100.0 / MAX_SIM as f64;
         }

@@ -104,13 +104,17 @@ pub fn initialize_team_vec() -> Result<(u32, Vec<Team>), bool> {
 }
 
 fn assert_points(team: &Team) -> bool {
-    let expected_points = team.points;
+    let file_input_points = team.points;
 
-    let current_ties = team.games - team.wins;
+    let current_ties_and_loses = team.games - team.wins;
 
-    let current_points = team.wins * 3 + current_ties;
+    let sum_of_all_possible_points = team.wins * 3 + current_ties_and_loses;
 
-    expected_points <= current_points
+    file_input_points <= sum_of_all_possible_points //This happens because our model does not
+                                                    //differentiate lose and tie. Therefore, our
+                                                    //right hand estimative is always the input
+                                                    //amount or more (considering all not wind ==
+                                                    //ties).
 }
 
 fn read_team_from_line(part: &str, i: usize) -> Team {
