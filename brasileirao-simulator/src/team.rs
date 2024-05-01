@@ -5,7 +5,7 @@ use std::fs;
 pub struct Team {
     pub name: String,
     pub points: u32,
-    wins: u32,
+    pub wins: u32,
     pub games: u32,
     pub win_rate: f32,
     pub original_index: usize,
@@ -30,33 +30,37 @@ impl Team {
         }
     }
 
-    pub fn update_win_rate(mut self) -> Self {
-        self.win_rate = self.wins as f32 / self.games as f32;
-        self
+    pub fn update_win_rate(self) -> Self {
+        let mut updated_team = self.clone();
+        updated_team.win_rate = self.wins as f32 / self.games as f32;
+        updated_team
     }
 
-    pub fn win(mut self) -> Self {
-        self.games += 1;
-        self.wins += 1;
-        self.update_win_rate()
+    pub fn win(self) -> Self {
+        let mut updated_team = self.clone();
+        updated_team.games += 1;
+        updated_team.wins += 1;
+        updated_team.update_win_rate()
     }
 
-    pub fn lose(mut self) -> Self {
-        self.games += 1;
-        self = self.update_win_rate();
-        self
+    pub fn lose(self) -> Self {
+        let mut updated_team = self.clone();
+        updated_team.games += 1;
+        updated_team.update_win_rate()
     }
 
-    pub fn win_points(mut self) -> Self {
-        self = self.win();
-        self.points += 3;
-        self.update_win_rate()
+    pub fn win_points(self) -> Self {
+        let mut updated_team = self.clone();
+        updated_team = updated_team.win();
+        updated_team.points += 3;
+        updated_team.update_win_rate()
     }
 
-    pub fn tie_points(mut self) -> Self {
-        self.games += 1;
-        self.points += 1;
-        self.update_win_rate()
+    pub fn tie_points(self) -> Self {
+        let mut updated_team = self.clone();
+        updated_team.games += 1;
+        updated_team.points += 1;
+        updated_team.update_win_rate()
     }
 }
 
@@ -131,9 +135,8 @@ fn read_team_from_line(part: &str, i: usize) -> Team {
         .parse::<u32>()
         .expect("Deveria haver um valor de pontos aqui.");
 
-    let mut current_team = Team::new(name.to_string(), points, wins, games, 0.0, i);
-    current_team = current_team.update_win_rate();
-    current_team
+    let current_team = Team::new(name.to_string(), points, wins, games, 0.0, i);
+    current_team.update_win_rate()
 }
 
 //#[test]

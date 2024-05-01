@@ -3,16 +3,14 @@ use brasileirao_simulator::display_results::{
     save_teams_summary_log,
 };
 use brasileirao_simulator::game_match::initialize_match_vec;
+use brasileirao_simulator::simulator::simulate_championship;
 use brasileirao_simulator::team::initialize_team_vec;
-use brasileirao_simulator::{game_match::Match, team::Team};
+use brasileirao_simulator::MAX_SIM;
+use brasileirao_simulator::{MAX_THREADS, NUMBER_OF_TEAMS};
 
 use std::sync::Arc;
 use std::vec;
 use std::{env, thread};
-
-const MAX_SIM: u32 = 1_000_000_000;
-const MAX_THREADS: usize = 32;
-const NUMBER_OF_TEAMS: usize = 20;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -40,18 +38,21 @@ fn main() {
         let team_vec = team_vec.clone();
         let match_vec = Arc::clone(&match_vec);
         thread_vec.push(thread::spawn(move || {
-            {
-                simulate_championship(
-                    first_match_index,
-                    team_vec,
-                    match_vec,
-                    all_teams_positions[i],
-                    all_teams_positions_percentage[i],
-                    all_internacional_first_match_stats[i],
-                    all_internacional_first_match_percentage[i],
-                    all_positions_total_points[i],
-                )
-            }
+            let teams_positions = all_teams_positions[i];
+            let teams_positions_percentage = all_teams_positions_percentage[i];
+            let internacional_first_match_stats = all_internacional_first_match_stats[i];
+            let internacional_first_match_percentage = all_internacional_first_match_percentage[i];
+            let positions_total_points = all_positions_total_points[i];
+            simulate_championship(
+                first_match_index,
+                team_vec,
+                match_vec,
+                teams_positions,
+                teams_positions_percentage,
+                internacional_first_match_stats,
+                internacional_first_match_percentage,
+                positions_total_points,
+            )
         }));
     }
 
@@ -152,68 +153,5 @@ fn accumulate_all_threads_results(
         final_internacional_first_match_percentage,
         final_percentages,
         all_positions_average_points,
-    )
-}
-
-#[allow(clippy::too_many_arguments)]
-fn simulate_championship(
-    first_match_index: u32,
-    team_vec: Vec<Team>,
-    match_vec: Arc<Vec<Match>>,
-    mut teams_positions: [[u32; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS],
-    mut teams_positions_percentage: [[f64; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS],
-    mut internacional_first_match_stats: [u32; 3],
-    mut internacional_first_match_percentage: [f64; 3],
-    mut positions_total_points: [u32; NUMBER_OF_TEAMS],
-) -> (
-    [[f64; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS],
-    [f64; 3],
-    [u32; NUMBER_OF_TEAMS],
-) {
-    (0..MAX_SIM / MAX_THREADS as u32).for_each(|current_iteration| {
-        let mut team_vec = team_vec.clone();
-
-        for game_match in match_vec.iter() {
-            (team_vec, internacional_first_match_stats) = game_match.simulate_points_game(
-                first_match_index,
-                team_vec,
-                internacional_first_match_stats,
-            );
-        }
-        team_vec.sort_by(|a, b| b.points.cmp(&a.points));
-
-        for (i, team) in team_vec.iter().enumerate() {
-            teams_positions[team.original_index][i] += 1;
-        }
-
-        for (i, team) in team_vec.iter().enumerate() {
-            positions_total_points[i] += team.points;
-        }
-
-        if current_iteration % 10000 == 0 {
-            println!(
-                "Current iteration {} on thread {:?}.",
-                current_iteration,
-                thread::current().id()
-            );
-        }
-    });
-
-    (0..NUMBER_OF_TEAMS).for_each(|i| {
-        for j in 0..NUMBER_OF_TEAMS {
-            teams_positions_percentage[i][j] =
-                teams_positions[i][j] as f64 * 100.0 / MAX_SIM as f64;
-        }
-    });
-
-    for i in 0..3 {
-        internacional_first_match_percentage[i] =
-            internacional_first_match_stats[i] as f64 * 100.0 / MAX_SIM as f64;
-    }
-
-    (
-        teams_positions_percentage,
-        internacional_first_match_percentage,
-        positions_total_points,
     )
 }
