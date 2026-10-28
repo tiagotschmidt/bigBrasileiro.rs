@@ -1,6 +1,6 @@
 use std::{collections::HashMap, fs, sync::Arc, thread, vec};
 
-use crate::{game_match::Match, team::Team, MAX_SIM, MAX_THREADS, NUMBER_OF_TEAMS};
+use crate::{game_match::Match, team::Team, MAX_THREADS, NUMBER_OF_TEAMS};
 
 #[allow(dead_code)]
 pub struct Simulator {
@@ -94,6 +94,7 @@ impl Default for Simulator {
 
 #[allow(clippy::too_many_arguments)]
 pub fn simulate_championship(
+    max_sim: u32,
     first_match_index: u32,
     team_vec: Vec<Team>,
     match_vec: Arc<Vec<Match>>,
@@ -107,7 +108,7 @@ pub fn simulate_championship(
     [f64; 3],
     [u32; NUMBER_OF_TEAMS],
 ) {
-    (0..MAX_SIM / MAX_THREADS as u32).for_each(|current_iteration| {
+    (0..max_sim / MAX_THREADS as u32).for_each(|current_iteration| {
         let mut team_vec = team_vec.clone();
 
         for game_match in match_vec.iter() {
@@ -127,7 +128,7 @@ pub fn simulate_championship(
             positions_total_points[i] += team.points;
         }
 
-        if current_iteration % 100000 == 0 {
+        if current_iteration > 0 && current_iteration % 100000 == 0 {
             println!(
                 "Current iteration {} on thread {:?}.",
                 current_iteration,
@@ -139,13 +140,13 @@ pub fn simulate_championship(
     (0..NUMBER_OF_TEAMS).for_each(|i| {
         for j in 0..NUMBER_OF_TEAMS {
             teams_positions_percentage[i][j] =
-                teams_positions[i][j] as f64 * 100.0 / MAX_SIM as f64;
+                teams_positions[i][j] as f64 * 100.0 / max_sim as f64;
         }
     });
 
     for i in 0..3 {
         internacional_first_match_percentage[i] =
-            internacional_first_match_stats[i] as f64 * 100.0 / MAX_SIM as f64;
+            internacional_first_match_stats[i] as f64 * 100.0 / max_sim as f64;
     }
 
     (

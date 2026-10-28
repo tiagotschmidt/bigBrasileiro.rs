@@ -5,8 +5,7 @@ use brasileirao_simulator::display_results::{
 use brasileirao_simulator::game_match::initialize_match_vec;
 use brasileirao_simulator::simulator::simulate_championship;
 use brasileirao_simulator::team::initialize_team_vec;
-use brasileirao_simulator::MAX_SIM;
-use brasileirao_simulator::{MAX_THREADS, NUMBER_OF_TEAMS};
+use brasileirao_simulator::{MAX_SIM_GITHUB, MAX_SIM_LOCAL, MAX_THREADS, NUMBER_OF_TEAMS};
 
 use std::sync::Arc;
 use std::vec;
@@ -14,6 +13,34 @@ use std::{env, thread};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+
+    // Check if running on GitHub:
+    // 1. Argument 1 is "true" (as passed by .github/workflows/rust.yml)
+    // 2. Or environment variable GITHUB_ACTIONS is present
+    let is_running_on_github = args.get(1).map(|s| s.as_str()) == Some("true")
+        || env::var("GITHUB_ACTIONS").is_ok();
+
+    // Dynamically choose MAX_SIM:
+    // - Argument 2 (e.g., cargo run -- true 1000000) overrides count
+    // - Or MAX_SIM env var overrides count
+    // - If on GitHub Actions: MAX_SIM_GITHUB (100_000_000, ~10 min on 2-vCPU runner)
+    // - If running locally: MAX_SIM_LOCAL (1_000_000_000 for full simulation)
+    let max_sim: u32 = if let Some(sim_arg) = args.get(2).and_then(|s| s.parse::<u32>().ok()) {
+        sim_arg
+    } else if let Some(sim_env) = env::var("MAX_SIM").ok().and_then(|s| s.parse::<u32>().ok()) {
+        sim_env
+    } else if is_running_on_github {
+        MAX_SIM_GITHUB
+    } else {
+        MAX_SIM_LOCAL
+    };
+
+    println!(
+        "Simulation target: {} | MAX_SIM: {} | Threads: {}",
+        if is_running_on_github { "GitHub Actions" } else { "Local" },
+        max_sim,
+        MAX_THREADS
+    );
 
     let match_vec = Arc::new(initialize_match_vec());
     let (first_match_index, team_vec) = match initialize_team_vec() {
@@ -44,6 +71,7 @@ fn main() {
             let internacional_first_match_percentage = all_internacional_first_match_percentage[i];
             let positions_total_points = all_positions_total_points[i];
             simulate_championship(
+                max_sim,
                 first_match_index,
                 team_vec,
                 match_vec,
@@ -66,6 +94,7 @@ fn main() {
 
     let (final_internacional_first_match_percentage, final_percentages, final_average_points) =
         accumulate_all_threads_results(
+            max_sim,
             final_percentages,
             all_teams_positions_percentage,
             all_internacional_first_match_percentage,
@@ -74,13 +103,13 @@ fn main() {
 
     display_header_result(
         final_internacional_first_match_percentage,
-        MAX_SIM,
+        max_sim,
         MAX_THREADS,
     );
 
-    let is_running_on_github = args.get(1).map(|s| s.as_str()).unwrap_or("true");
+    let log_flag = args.get(1).map(|s| s.as_str()).unwrap_or("false");
 
-    match is_running_on_github {
+    match log_flag {
         "true" => {
             print_teams_full_log(team_vec_for_display.clone(), final_percentages);
             print_teams_summary_log(
@@ -98,7 +127,7 @@ fn main() {
             );
         }
         _ => {
-            println!("Warning: argument '{}' not recognized. Use 'true' (stdout) or 'false' (save to logs/). Running with default 'true'.", is_running_on_github);
+            println!("Warning: argument '{}' not recognized. Use 'true' (stdout) or 'false' (save to logs/). Running with default 'true'.", log_flag);
             print_teams_full_log(team_vec_for_display.clone(), final_percentages);
             print_teams_summary_log(
                 team_vec_for_display,
@@ -110,6 +139,7 @@ fn main() {
 }
 
 fn accumulate_all_threads_results(
+    max_sim: u32,
     mut final_percentages: [[f64; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS],
     all_teams_positions_percentage: [[[f64; NUMBER_OF_TEAMS]; NUMBER_OF_TEAMS]; MAX_THREADS],
     all_internacional_first_match_percentage: [[f64; 3]; MAX_THREADS],
@@ -151,7 +181,7 @@ fn accumulate_all_threads_results(
     });
 
     (0..NUMBER_OF_TEAMS).for_each(|i| {
-        all_positions_average_points[i] /= MAX_SIM as f64;
+        all_positions_average_points[i] /= max_sim as f64;
     });
 
     (
@@ -160,3 +190,4 @@ fn accumulate_all_threads_results(
         all_positions_average_points,
     )
 }
+

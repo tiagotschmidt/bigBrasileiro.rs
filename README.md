@@ -13,18 +13,25 @@ The simulator calculates probabilities for each club:
 
 ## 🚀 How to Run
 
-### 1. Running the Simulation Locally
+### 1. Running the Simulation
+
+The simulator dynamically switches `MAX_SIM` depending on the environment:
+- **GitHub Actions / CI (`true` or `GITHUB_ACTIONS=true`):** Uses `MAX_SIM_GITHUB = 100_000_000` (calibrated to complete in ~10 minutes on a 2-vCPU runner).
+- **Local Deployment (`false` or default):** Uses `MAX_SIM_LOCAL = 1_000_000_000` (deep billion-iteration simulation for maximum statistical accuracy).
+- **Custom Override:** You can pass a custom count as the second argument or via `MAX_SIM` environment variable.
 
 ```bash
-# Run simulation and print results directly to the terminal (stdout):
+# GitHub Actions mode (stdout output, 100M simulations):
 cargo run --manifest-path brasileirao-simulator/Cargo.toml --release -- true
 
-# Or from inside the brasileirao-simulator directory:
-cd brasileirao-simulator
-cargo run --release -- true
+# Local deployment mode (saves reports to logs/, 1B simulations):
+cargo run --manifest-path brasileirao-simulator/Cargo.toml --release -- false
 
-# To save full reports to the `logs/` directory:
-cargo run --release -- false
+# Custom iteration count (e.g., quick 100k run for testing):
+cargo run --release -- true 100000
+
+# Or via environment variable:
+MAX_SIM=1000000 cargo run --release -- false
 ```
 
 ### 2. Running Unit Tests
