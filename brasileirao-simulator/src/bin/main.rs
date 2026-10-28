@@ -78,29 +78,34 @@ fn main() {
         MAX_THREADS,
     );
 
-    let is_running_on_github = args.get(1);
+    let is_running_on_github = args.get(1).map(|s| s.as_str()).unwrap_or("true");
 
-    if let Some(boolean_string) = is_running_on_github {
-        match boolean_string == &"true".to_string() {
-            true => {
-                print_teams_full_log(team_vec_for_display.clone(), final_percentages);
-                print_teams_summary_log(
-                    team_vec_for_display,
-                    final_percentages,
-                    final_average_points,
-                );
-            }
-            false => {
-                save_teams_full_log(team_vec_for_display.clone(), final_percentages);
-                save_teams_summary_log(
-                    team_vec_for_display,
-                    final_percentages,
-                    final_average_points,
-                );
-            }
+    match is_running_on_github {
+        "true" => {
+            print_teams_full_log(team_vec_for_display.clone(), final_percentages);
+            print_teams_summary_log(
+                team_vec_for_display,
+                final_percentages,
+                final_average_points,
+            );
         }
-    } else {
-        panic!("Execução de comando shell incorreto! Exemplo: ./brasileirao-simulator false (is_running_on_github)")
+        "false" => {
+            save_teams_full_log(team_vec_for_display.clone(), final_percentages);
+            save_teams_summary_log(
+                team_vec_for_display,
+                final_percentages,
+                final_average_points,
+            );
+        }
+        _ => {
+            println!("Warning: argument '{}' not recognized. Use 'true' (stdout) or 'false' (save to logs/). Running with default 'true'.", is_running_on_github);
+            print_teams_full_log(team_vec_for_display.clone(), final_percentages);
+            print_teams_summary_log(
+                team_vec_for_display,
+                final_percentages,
+                final_average_points,
+            );
+        }
     }
 }
 

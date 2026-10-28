@@ -133,12 +133,70 @@ impl Match {
     }
 }
 
+pub fn read_match_content(primary_path: &str) -> String {
+    if let Ok(c) = fs::read_to_string(primary_path) {
+        return c;
+    }
+    let parent_path = format!("../{}", primary_path);
+    if let Ok(c) = fs::read_to_string(&parent_path) {
+        return c;
+    }
+    if let Ok(c) = fs::read_to_string("jogos2026.txt") {
+        return c;
+    }
+    if let Ok(c) = fs::read_to_string("../jogos2026.txt") {
+        return c;
+    }
+    if let Ok(c) = fs::read_to_string("jogos06-11.txt") {
+        return c;
+    }
+    if let Ok(c) = fs::read_to_string("../jogos06-11.txt") {
+        return c;
+    }
+    panic!("Unable to find matches file: {}", primary_path);
+}
+
 pub fn initialize_match_vec() -> Vec<Match> {
+    initialize_match_vec_from_file("jogos2026.txt")
+}
+
+pub fn initialize_match_vec_from_file(path: &str) -> Vec<Match> {
     let mut match_vec: Vec<Match> = Vec::with_capacity(380);
-    let content = fs::read_to_string("../jogos06-11.txt").expect("Deve existir esse arquivo.");
+    let content = read_match_content(path);
     for part in content.lines() {
+        if part.trim().is_empty() {
+            continue;
+        }
         let current_match = Match::new(part);
         match_vec.push(current_match);
     }
     match_vec
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_match_parsing() {
+        let m = Match::new("12/05;Flamengo;Palmeiras");
+        assert_eq!(m.first_team, "Flamengo");
+        assert_eq!(m.second_team, "Palmeiras");
+        assert_eq!(m.date, "12/05");
+    }
+
+    #[test]
+    fn test_simulate_points_game() {
+        let m = Match::new("12/05;Flamengo;Palmeiras");
+        let team_a = Team::new("Flamengo".to_string(), 10, 3, 5, 0.6, 0);
+        let team_b = Team::new("Palmeiras".to_string(), 8, 2, 5, 0.4, 1);
+        let teams = vec![team_a, team_b];
+
+        let (updated_teams, _) = m.simulate_points_game(100, teams, [0, 0, 0]);
+        assert_eq!(updated_teams[0].games, 6);
+        assert_eq!(updated_teams[1].games, 6);
+        // Valid outcomes: (13, 8), (10, 11), or (11, 9)
+        let total_points = updated_teams[0].points + updated_teams[1].points;
+        assert!(total_points == 21 || total_points == 20);
+    }
 }

@@ -87,11 +87,41 @@ impl Default for Team {
     }
 }
 
+pub fn read_team_content(primary_path: &str) -> String {
+    if let Ok(c) = fs::read_to_string(primary_path) {
+        return c;
+    }
+    let parent_path = format!("../{}", primary_path);
+    if let Ok(c) = fs::read_to_string(&parent_path) {
+        return c;
+    }
+    if let Ok(c) = fs::read_to_string("times2026.txt") {
+        return c;
+    }
+    if let Ok(c) = fs::read_to_string("../times2026.txt") {
+        return c;
+    }
+    if let Ok(c) = fs::read_to_string("times06-11.txt") {
+        return c;
+    }
+    if let Ok(c) = fs::read_to_string("../times06-11.txt") {
+        return c;
+    }
+    panic!("Unable to find teams file: {}", primary_path);
+}
+
 pub fn initialize_team_vec() -> Result<(u32, Vec<Team>), bool> {
+    initialize_team_vec_from_file("times2026.txt")
+}
+
+pub fn initialize_team_vec_from_file(path: &str) -> Result<(u32, Vec<Team>), bool> {
     let mut team_vec: Vec<Team> = Vec::with_capacity(20);
-    let content = fs::read_to_string("../times06-11.txt").expect("Deve existir esse arquivo.");
+    let content = read_team_content(path);
     let mut current_first_game = 0;
     for (i, part) in content.lines().enumerate() {
+        if part.trim().is_empty() {
+            continue;
+        }
         let current_team = read_team_from_line(part, i);
 
         if current_team.name == "Internacional" {
@@ -139,19 +169,32 @@ fn read_team_from_line(part: &str, i: usize) -> Team {
     current_team.update_win_rate()
 }
 
-//#[test]
-//fn test() {
-//    let (_first_game, mut team_vec) = match initialize_team_vec() {
-//        Ok(team_vec) => team_vec,
-//        Err(_) => panic!("Os times possuem pontos, vitórias e jogos incoerentes."),
-//    };
-//
-//    let output_file =
-//        File::create("times-07_new.txt").expect("Não foi possível criar o arquivo.");
-//
-//    team_vec.sort_by(|a, b| b.points.cmp(&a.points));
-//
-//    for team in team_vec {
-//        writeln!(&output_file, "{}", team).unwrap();
-//    }
-//}
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_team_parsing() {
+        let team = read_team_from_line("Flamengo;7;2;3", 0);
+        assert_eq!(team.name, "Flamengo");
+        assert_eq!(team.points, 7);
+        assert_eq!(team.wins, 2);
+        assert_eq!(team.games, 3);
+        assert!((team.win_rate - 2.0 / 3.0).abs() < f32::EPSILON);
+    }
+
+    #[test]
+    fn test_assert_points_valid() {
+        // 2 wins * 3 = 6 pts + 1 tie = 7 pts in 3 games -> valid
+        let team = Team::new("Flamengo".to_string(), 7, 2, 3, 0.66, 0);
+        assert!(assert_points(&team));
+    }
+
+    #[test]
+    fn test_assert_points_invalid() {
+        // 2 wins * 3 = 6 pts max from wins, + 0 non-wins = 6 pts max in 2 games, but claims 7 points -> invalid
+        let team = Team::new("Incoherent".to_string(), 7, 2, 2, 1.0, 0);
+        assert!(!assert_points(&team));
+    }
+}
+

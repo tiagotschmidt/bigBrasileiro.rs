@@ -1,6 +1,9 @@
 use crate::team::Team;
 use chrono::{DateTime, Local};
-use std::{fs::File, io::Write};
+use std::{
+    fs::{self, File},
+    io::Write,
+};
 
 pub fn display_header_result(
     final_internacional_first_match_percentage: [f64; 3],
@@ -46,6 +49,7 @@ pub fn display_summary_result(team_name: String, positions_percentage: [f64; 20]
 }
 
 pub fn save_teams_full_log(team_vec_for_display: Vec<Team>, final_positions: [[f64; 20]; 20]) {
+    let _ = fs::create_dir_all("logs");
     let now: DateTime<Local> = Local::now();
     let now_str = format!("logs/full_table_{}", now);
     let output_file = File::create(&now_str).expect("Não foi possível criar o arquivo.");
@@ -74,6 +78,7 @@ pub fn save_teams_summary_log(
     final_positions: [[f64; 20]; 20],
     positions_average_points: [f64; 20],
 ) {
+    let _ = fs::create_dir_all("logs");
     let now: DateTime<Local> = Local::now();
     let now_str = format!("logs/summary_table_{}", now);
     let output_file = File::create(&now_str).expect("Não foi possível criar o arquivo.");

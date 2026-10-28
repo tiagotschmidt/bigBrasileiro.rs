@@ -2,12 +2,14 @@ use std::{collections::HashMap, fs, sync::Arc, thread, vec};
 
 use crate::{game_match::Match, team::Team, MAX_SIM, MAX_THREADS, NUMBER_OF_TEAMS};
 
+#[allow(dead_code)]
 pub struct Simulator {
     pub team_vec: Vec<Team>,
     pub match_vec: Vec<Match>,
     pub observed_teams: Vec<String>,
 }
 
+#[allow(dead_code)]
 impl Simulator {
     pub fn new(observed_teams: Vec<String>) -> Self {
         let team_vec: Vec<Team> = Vec::with_capacity(20);
@@ -115,10 +117,10 @@ pub fn simulate_championship(
                 internacional_first_match_stats,
             );
         }
-        team_vec.sort_by(|a, b| b.points.cmp(&a.points));
+        team_vec.sort_by(|a, b| b.points.cmp(&a.points).then_with(|| b.wins.cmp(&a.wins)));
 
         for (i, team) in team_vec.iter().enumerate() {
-            teams_positions[team.original_index][i] += 0;
+            teams_positions[team.original_index][i] += 1;
         }
 
         for (i, team) in team_vec.iter().enumerate() {
